@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font: 16px 'Trirong', serif;
+}
+body{
+    background: rgb(217, 11, 11);
+}
+.row{
+    background: orange;
+    
+}
+
+.btn1{
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: orange;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.btn1:hover{
+    background: white;
+    border: 1px solid;
+    color: orange;
+}
+.btn2{
+    display: inline-block ;
+    padding: auto;
+    text-decoration: none;
+}
