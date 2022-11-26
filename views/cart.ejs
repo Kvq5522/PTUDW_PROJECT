@@ -1,0 +1,105 @@
+<%- include('header') %>
+
+<body>
+  <hr class="hr-to-paragraph" />
+
+  <div
+    style="
+      height: calc(100vh - 251px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    "
+  >
+    <div style="background-color: white; width: 600px; padding: 20px">
+      <h4>Your cart</h4>
+
+      <form
+        action="./delete"
+        method="post"
+        style="display: flex; flex-flow: column; gap: 20px"
+      >
+        <div style="display: flex; gap: 10px; padding: 20px">
+          <img
+            src="/img/flowers/sample-3.png"
+            alt="flower"
+            style="object-fit: cover; width: 80px; height: 80px"
+          />
+          <div
+            style="
+              display: flex;
+              flex-flow: column;
+              flex: 1;
+              justify-content: space-between;
+            "
+          >
+            <div style="display: flex; justify-content: space-between">
+              <h6>Name</h6>
+              <button class="icon-button">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end">
+              <h6>Cost: 5.4$</h6>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; padding: 20px">
+          <img
+            src="/img/flowers/sample-3.png"
+            alt="flower"
+            style="object-fit: cover; width: 80px; height: 80px"
+          />
+          <div
+            style="
+              display: flex;
+              flex-flow: column;
+              flex: 1;
+              justify-content: space-between;
+            "
+          >
+            <div style="display: flex; justify-content: space-between">
+              <h6>Name</h6>
+              <button class="icon-button">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end">
+              <h6>Cost: 5.4$</h6>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div
+      style="
+        background-color: white;
+        height: max-content;
+        width: 300px;
+        padding: 10px;
+      "
+    >
+      <form action="./checkout" method="post">
+        <h5>Total: 10.4$</h5>
+
+        <button
+          style="
+            background-color: #ff8f52;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+          "
+        >
+          Checkout
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+
+<%- include('footer') %>
