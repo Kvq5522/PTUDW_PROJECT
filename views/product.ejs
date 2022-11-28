@@ -3,56 +3,106 @@
 <body>
   <hr class="hr-to-paragraph" />
 
-  <div
-    class="container"
-    style="
-      height: calc(100vh - 251px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    "
-  >
-    <form
-      action="./product"
-      method="post"
+  <div style="height: calc(100vh - 251px)">
+    <div
+      class="container fixed-content"
       style="
         display: flex;
-        background-color: white;
-        gap: 30px;
-        padding: 30px;
-        border-radius: 10px;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+        gap: 10px;
       "
     >
-      <img src="/img/flowers/sample-2.png" alt="flower" style="flex: 1" />
+      <button style="width: max-content">
+        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+      </button>
 
-      <div
-        style="
-          display: flex;
-          flex-flow: column;
-          justify-content: space-between;
-          flex: 2;
-        "
-      >
-        <div>
-          <h5>Name</h5>
-          <p>
-            Description: Lorem ipsum dolor sit, amet consectetur adipisicing
-            elit. Quidem qui voluptates doloremque atque recusandae possimus
-            rerum quod totam ducimus. Accusamus quo nulla aut nobis magni
-            corporis excepturi animi quasi! Illo!
-          </p>
+      <button style="width: max-content">
+        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+      </button>
+
+      <button id="sort-expensive" style="width: max-content">
+        Expensive <i class="fas fa-sort-amount-up"></i>
+      </button>
+
+      <button id="sort-cheap" style="width: max-content">
+        Cheap <i class="fas fa-sort-amount-down"></i>
+      </button>
+    </div>
+
+    <hr class="hr-between-paragraph" />
+
+    <form action="./" method="post" class="shop-form">
+      <div class="product-container">
+        <a href="/product/1" style="display: block; width: 100%"
+          ><img
+            src="/img/flowers/sample-1.png"
+            alt="flower"
+            style="width: 100%"
+        /></a>
+        <div style="display: flex; flex-flow: column">
+          <h3>Name</h3>
+          <div style="display: flex; justify-content: space-between">
+            <h5>5.4$</h5>
+            <button style="border: none">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+          </div>
         </div>
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            justify-self: flex-end;
-          "
-        >
-          <h5>Price: 5.4$</h5>
-          <button class="cart-button">
-            <i class="fa-solid fa-cart-shopping"></i> Add to cart
-          </button>
+      </div>
+
+      <div class="product-container">
+        <a href="/product/2" style="display: block; width: 100%"
+          ><img
+            src="/img/flowers/sample-2.png"
+            alt="flower"
+            style="width: 100%"
+        /></a>
+        <div style="display: flex; flex-flow: column">
+          <h3>Name</h3>
+          <div style="display: flex; justify-content: space-between">
+            <h5>5.4$</h5>
+            <button style="border: none">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-container">
+        <a href="/product/3" style="display: block; width: 100%"
+          ><img
+            src="/img/flowers/sample-3.png"
+            alt="flower"
+            style="width: 100%"
+        /></a>
+        <div style="display: flex; flex-flow: column">
+          <h3>Name</h3>
+          <div style="display: flex; justify-content: space-between">
+            <h5>5.4$</h5>
+            <button style="border: none">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-container">
+        <a href="/product/4" style="display: block; width: 100%"
+          ><img
+            src="/img/flowers/sample-4.png"
+            alt="flower"
+            style="width: 100%"
+        /></a>
+        <div style="display: flex; flex-flow: column">
+          <h3>Name</h3>
+          <div style="display: flex; justify-content: space-between">
+            <h5>5.4$</h5>
+            <button style="border: none">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+          </div>
         </div>
       </div>
     </form>

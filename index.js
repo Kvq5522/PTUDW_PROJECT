@@ -23,12 +23,12 @@ app.get('/', (req, res) => {
     res.render('./index');
 });
 
-app.get('/shop', (req, res) => {
-    res.render('./shop');
+app.get('/product', (req, res) => {
+    res.render('./product');
 });
 
 app.get('/product/:productID', (req, res) => {
-    res.render('./product');
+    res.render('./product_detail');
 });
 
 app.get('/user', (req, res) => {
