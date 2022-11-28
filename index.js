@@ -45,6 +45,10 @@ app.get('/signup', (req, res) => {
     res.render('./signup');
 });
 
+app.get('/about', (req, res) => {
+    res.send('about')
+});
+
 app.get('/cart', (req, res) => {
     res.render('./cart');
 });
