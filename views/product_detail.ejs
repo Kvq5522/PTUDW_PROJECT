@@ -5,25 +5,27 @@
 
   <div
     class="container"
-    style="
-      height: calc(100vh - 251px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    "
+    style="display: flex; justify-content: center; align-items: center"
   >
     <form
-      action="./product"
+      action="/product/add"
       method="post"
       style="
         display: flex;
         background-color: white;
-        gap: 30px;
-        padding: 30px;
+        gap: 50px;
+        padding: 50px;
         border-radius: 10px;
+        width: calc(100vw - 100px);
       "
     >
-      <img src="/img/flowers/sample-2.png" alt="flower" style="flex: 1" />
+      <div style="display: flex">
+        <img
+          src="<%= item.image_url %>"
+          alt="flower"
+          style="width: calc((100vw - 100px) * 0.25); height: inherit"
+        />
+      </div>
 
       <div
         style="
@@ -34,22 +36,18 @@
         "
       >
         <div>
-          <h5>Name</h5>
-          <p>
-            Description: Lorem ipsum dolor sit, amet consectetur adipisicing
-            elit. Quidem qui voluptates doloremque atque recusandae possimus
-            rerum quod totam ducimus. Accusamus quo nulla aut nobis magni
-            corporis excepturi animi quasi! Illo!
-          </p>
+          <h5><%= item.name %></h5>
+          <p><%= item.description %></p>
         </div>
         <div
           style="
             display: flex;
             justify-content: space-between;
             justify-self: flex-end;
+            gap: 100px;
           "
         >
-          <h5>Price: 5.4$</h5>
+          <h5>Price: <%= item.price %>$</h5>
           <button class="cart-button">
             <i class="fa-solid fa-cart-shopping"></i> Add to cart
           </button>
@@ -57,6 +55,66 @@
       </div>
     </form>
   </div>
+
+  <br />
+
+  <div
+    class="container"
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+    "
+  >
+    <div
+      style="
+        display: flex;
+        flex-flow: column;
+        height: 100px;
+        width: calc((100vw - 150px) / 4);
+        justify-content: center;
+        align-items: center;
+        border-color: lightcoral;
+      "
+    >
+      <h5>Review</h5>
+    </div>
+
+    <div
+      style="
+        display: flex;
+        flex-flow: column;
+        height: 100px;
+        width: calc((100vw - 150px) * 3 / 4);
+        justify-content: center;
+        align-items: center;
+        border-color: lightcoral;
+      "
+    >
+      <h5>Related products</h5>
+
+      <div style="display: flex">
+        <% for (let i = 0; i < relatedList.length; i++) { %>
+        <div class="col-sm-4" style="padding: 10px">
+          <p><%= relatedList[i].name %></p>
+          <div class="card">
+            <a
+              href="/product/<%= relatedList[i].id %>"
+              style="display: flex; width: 100%; justify-content: center"
+              ><img
+                src="<%= relatedList[i].image_url %>"
+                alt="flower"
+                style="width: 75%"
+            /></a>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <br />
 </body>
 
 <%- include('footer') %>

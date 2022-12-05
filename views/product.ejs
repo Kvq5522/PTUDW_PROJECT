@@ -3,7 +3,9 @@
 <body>
   <hr class="hr-to-paragraph" />
 
-  <div style="height: calc(100vh - 251px)">
+  <br />
+
+  <!-- <div style="height: calc(100vh - 251px)">
     <div
       class="container fixed-content"
       style="
@@ -33,80 +35,56 @@
 
     <hr class="hr-between-paragraph" />
 
-    <form action="./" method="post" class="shop-form">
-      <div class="product-container">
-        <a href="/product/1" style="display: block; width: 100%"
-          ><img
-            src="/img/flowers/sample-1.png"
-            alt="flower"
-            style="width: 100%"
-        /></a>
-        <div style="display: flex; flex-flow: column">
-          <h3>Name</h3>
-          <div style="display: flex; justify-content: space-between">
-            <h5>5.4$</h5>
-            <button style="border: none">
-              <i class="fa-solid fa-cart-shopping"></i>
-            </button>
+    <form action="/" method="post" class="shop-form">
+      <% for (let i = 0; i < productList.length; i++) { %>
+        <div class="product-container">
+          <a href="/product/<%= productList[i].id %>" style="display: block; width: 100%"
+            ><img
+              src="<%= productList[i].image_url %>"
+              alt="flower"
+              style="width: 100%"
+          /></a>
+          <div style="display: flex; flex-flow: column">
+            <h3><%= productList[i].name %></h3>
+            <div style="display: flex; justify-content: space-between">
+              <h5><%= productList[i].price %>$</h5>
+              <button style="border: none">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="product-container">
-        <a href="/product/2" style="display: block; width: 100%"
-          ><img
-            src="/img/flowers/sample-2.png"
-            alt="flower"
-            style="width: 100%"
-        /></a>
-        <div style="display: flex; flex-flow: column">
-          <h3>Name</h3>
-          <div style="display: flex; justify-content: space-between">
-            <h5>5.4$</h5>
-            <button style="border: none">
-              <i class="fa-solid fa-cart-shopping"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-container">
-        <a href="/product/3" style="display: block; width: 100%"
-          ><img
-            src="/img/flowers/sample-3.png"
-            alt="flower"
-            style="width: 100%"
-        /></a>
-        <div style="display: flex; flex-flow: column">
-          <h3>Name</h3>
-          <div style="display: flex; justify-content: space-between">
-            <h5>5.4$</h5>
-            <button style="border: none">
-              <i class="fa-solid fa-cart-shopping"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-container">
-        <a href="/product/4" style="display: block; width: 100%"
-          ><img
-            src="/img/flowers/sample-4.png"
-            alt="flower"
-            style="width: 100%"
-        /></a>
-        <div style="display: flex; flex-flow: column">
-          <h3>Name</h3>
-          <div style="display: flex; justify-content: space-between">
-            <h5>5.4$</h5>
-            <button style="border: none">
-              <i class="fa-solid fa-cart-shopping"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+      <% } %>
     </form>
-  </div>
+  </div> -->
+
+  <form class="container" style="width: calc(100vw - 100px)">
+    <div class="row">
+      <% for (let i = 0; i < productList.length; i++) { %>
+      <div class="col-sm-4" style="padding: 10px">
+        <div class="card">
+          <a
+            href="/product/<%= productList[i].id %>"
+            style="display: flex; width: 100%; justify-content: center"
+            ><img
+              src="<%= productList[i].image_url %>"
+              alt="flower"
+              style="width: 75%"
+          /></a>
+          <div class="card-body">
+            <h5 class="card-title"><%= productList[i].name %></h5>
+            <p class="card-text"><%= productList[i].price %>$</p>
+            <a href="/product/add/<%= productList[i].id %>" role="button"
+              ><i class="fa-solid fa-cart-shopping" style="color: #ff8f52"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </form>
+
+  <br />
 </body>
 
 <%- include('footer') %>
