@@ -58,31 +58,41 @@
     </form>
   </div> -->
 
-  <form class="container" style="width: calc(100vw - 100px)">
-    <div class="row">
-      <% for (let i = 0; i < productList.length; i++) { %>
-      <div class="col-sm-4" style="padding: 10px">
-        <div class="card">
-          <a
-            href="/product/<%= productList[i].id %>"
-            style="display: flex; width: 100%; justify-content: center"
-            ><img
-              src="<%= productList[i].image_url %>"
-              alt="flower"
-              style="width: 75%"
-          /></a>
-          <div class="card-body">
-            <h5 class="card-title"><%= productList[i].name %></h5>
-            <p class="card-text"><%= productList[i].price %>$</p>
-            <a href="/product/add/<%= productList[i].id %>" role="button"
-              ><i class="fa-solid fa-cart-shopping" style="color: #ff8f52"></i
-            ></a>
-          </div>
-        </div>
-      </div>
-      <% } %>
+  <div style="display: flex;">
+    <div style="display: flex; flex-flow: column; width: calc((100vw - 100px) * 0.2); padding: 10px;">
+      <form action="" method="get" class="container" style="justify-content: center;">
+        a;lskjflkasjdf
+      </form>
     </div>
-  </form>
+
+    <div style="flex-flow: column; width: calc((100vw - 100px) * 0.8);">
+      <form class="container" style="width: calc(((100vw - 100px) * 0.8) * 0.8)">
+        <div class="row">
+          <% for (let i = 0; i < productList.length; i++) { %>
+          <div class="col-sm-4" style="padding: 10px">
+            <div class="card">
+              <a
+                href="/product/<%= productList[i].id %>"
+                style="display: flex; width: 100%; justify-content: center"
+                ><img
+                  src="<%= productList[i].image_url %>"
+                  alt="flower"
+                  style="width: 75%"
+              /></a>
+              <div class="card-body">
+                <h5 class="card-title"><%= productList[i].name %></h5>
+                <p class="card-text"><%= productList[i].price %>$</p>
+                <a href="/product/add/<%= productList[i].id %>" role="button"
+                  ><i class="fa-solid fa-cart-shopping" style="color: #ff8f52"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <br />
 </body>
