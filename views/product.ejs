@@ -59,17 +59,25 @@
   </div> -->
 
   <div style="display: flex;">
-    <div style="display: flex; flex-flow: column; width: calc((100vw - 100px) * 0.2); padding: 10px;">
-      <form action="" method="get" class="container" style="justify-content: center;">
-        a;lskjflkasjdf
+    <div style="flex-flow: column; width: calc(100vw * 0.3);">
+      <form action="/product" method="get" class="container" style="justify-content: center; width: calc((100vw * 0.3)); padding: 10px">
+          <div style="display: flex;">
+            <input type="text" name="search-name" style=" width: calc((100vw * 0.3) * 0.8)" placeholder="Product Name?">
+            <input type="submit" value="Submit" style=" width: calc((100vw * 0.3) * 0.2)">
+          </div>
+      </form>
+
+      <form action="/product" method="get" class="container">
+        <button name="sort-name-asc" value="on"><i class="fas fa-sort-alpha-down"></i></button>
+        <button name="sort-name-dsc" value="on"><i class="fas fa-sort-alpha-up"></i></button>
       </form>
     </div>
 
-    <div style="flex-flow: column; width: calc((100vw - 100px) * 0.8);">
-      <form class="container" style="width: calc(((100vw - 100px) * 0.8) * 0.8)">
+    <div style="flex-flow: column; width: calc(100vw * 0.7);">
+      <form class="container" style="width: calc(100vw * 0.7);">
         <div class="row">
           <% for (let i = 0; i < productList.length; i++) { %>
-          <div class="col-sm-4" style="padding: 10px">
+          <div class="col-sm-4" style="padding: 10px;">
             <div class="card">
               <a
                 href="/product/<%= productList[i].id %>"
