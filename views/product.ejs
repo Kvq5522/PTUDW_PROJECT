@@ -65,28 +65,42 @@
 
           <br />
 
-          <div style="display: flex;">
-            <div class="dropdown">
-              <button class="dropbtn">Sort by ↓</button>
-              <div class="dropdown-content">
-                <a href="<%=originalUrl%>&sort=price">Price</a>
-                <a href="<%=originalUrl%>&sort=latest">Latest</a>
-              </div>
-            </div>
+          <div>
+            <label for="sort">Sort by ↑:</label>
+            <select name="sort">
+              <option value="name">Name</option>
+              <option value="price">Price</option>
+              <option value="date">Date</option>
+            </select>
+          </div>
 
-            <div class="dropdown">
-              <button class="dropbtn">Filter by Color</button>
-              <div class="dropdown-content">
-                <a href="<%=originalUrl%>&color=all">All</a>
-                <a href="<%=originalUrl%>&color=red">Red</a>
-                <a href="<%=originalUrl%>&color=pink">Pink</a>
-                <a href="<%=originalUrl%>&color=yellow">Yellow</a>
-                <a href="<%=originalUrl%>&color=orange">Orange</a>
-                <a href="<%=originalUrl%>&color=white">White</a>
-                <a href="<%=originalUrl%>&color=blue">Blue</a>
-                <a href="<%=originalUrl%>&color=purple">Purple</a>
-              </div>
-            </div>
+          <br />
+
+          <div>
+            <label for="color">Filter by Color:</label>
+            <select name="color">
+              <option value="">All</option>
+              <option value="Red">Red</option>
+              <option value="Pink">Pink</option>
+              <option value="Yellow">Yellow</option>
+              <option value="Orange">Orange</option>
+              <option value="White">White</option>
+              <option value="Blue">Blue</option>
+              <option value="Purple">Purple</option>
+            </select>
+          </div>
+
+          <br />
+
+          <div>
+            <label for="priceRange">Filter by Price:</label>
+            <select name="priceRange">
+              <option value="0-1e9">All</option>
+              <option value="0-1000">0-1000</option>
+              <option value="1000-2500">1000-2500</option>
+              <option value="2500-5000">2500-5000</option>
+              <option value="5000-1000">5000-1000</option>
+            </select>
           </div>
       </form>
 
@@ -121,6 +135,7 @@
     </div>
   </div>
 
+  <br />
   <br />
 </body>
 
