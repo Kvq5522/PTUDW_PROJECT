@@ -23,7 +23,7 @@
         <img
           src="<%= item.image_url %>"
           alt="flower"
-          style="width: calc((100vw - 100px) * 0.25); height: inherit"
+          style="width: 400px; height: 400px; ;object-fit: cover;"
         />
       </div>
 
@@ -71,22 +71,20 @@
       style="
         display: flex;
         flex-flow: column;
-        height: 100px;
-        width: calc((100vw - 150px) / 4);
+        width: calc((100vw - 150px) * 0.4);
         justify-content: center;
         align-items: center;
         border-color: lightcoral;
       "
     >
-      <h5>Review</h5>
+      <h5 style="align-items:flex-start; justify-content: center;">Review</h5>
     </div>
 
     <div
       style="
         display: flex;
         flex-flow: column;
-        height: 100px;
-        width: calc((100vw - 150px) * 3 / 4);
+        width: calc((100vw - 150px) * 0.6);
         justify-content: center;
         align-items: center;
         border-color: lightcoral;
@@ -94,9 +92,9 @@
     >
       <h5>Related products</h5>
 
-      <div style="display: flex">
+      <div style="display: flex; flex-wrap: wrap;">
         <% for (let i = 0; i < relatedList.length; i++) { %>
-        <div class="col-sm-4" style="padding: 10px">
+        <div style="padding: 10px; flex-flow: column;">
           <h5><%= relatedList[i].name %></h5>
           <div class="card">
             <a
@@ -105,7 +103,7 @@
               ><img
                 src="<%= relatedList[i].image_url %>"
                 alt="flower"
-                style="width: 75%"
+                style="width: 192px; height: 192px; object-fit: cover;"
             /></a>
           </div>
         </div>

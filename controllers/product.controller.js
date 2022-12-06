@@ -1,19 +1,29 @@
 const products = require('../models/product.model');
+const qs = require('qs');
 
 const getProductPage = (req, res) => {
-    products.Product.find({}, (err, data) => {
+    const {sort, color, ...withoutFilter} = req.query;
+
+    let name = withoutFilter.name ? withoutFilter.name : '';
+    name = name.charAt(0).toUpperCase() + name.slice(1);
+
+    products.Product.find({name: {'$regex': name}}, (err, data) => {
         if (err) {
             console.log(err);
             res.status(500).send('Internal Server Error');
             return;
         }
 
-        res.render('product', { productList: data });
+        console.log(withoutFilter);
+
+        res.render('product', { productList: data, originalUrl: `${req.baseUrl}?${qs.stringify(withoutFilter)}` });
     });
 };
 
 const getProductDetailPage = (req, res) => {
     const id = req.params.productID;
+
+    console.log(req.query);
 
     products.Product.findById(id, (err, data) => {
         if (err) {
@@ -29,7 +39,7 @@ const getProductDetailPage = (req, res) => {
                 return;
             }
 
-            res.render('product_detail', { item: data, relatedList: listData });
+            res.render('product_detail', { item: data, relatedList: listData});
         });
     });
 };
