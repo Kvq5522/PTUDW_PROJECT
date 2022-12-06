@@ -1,4 +1,4 @@
-const products = require('../models/product.model');
+const products = require('../models/Product.model');
 const qs = require('qs');
 
 const getProductPage = (req, res) => {
@@ -7,14 +7,23 @@ const getProductPage = (req, res) => {
     let name = withoutFilter.name ? withoutFilter.name : '';
     name = name.charAt(0).toUpperCase() + name.slice(1);
 
-    products.Product.find({name: {'$regex': name}}, (err, data) => {
+    // products.Product.find({name: {'$regex': name}}, (err, data) => {
+    //     if (err) {
+    //         console.log(err);
+    //         res.status(500).send('Internal Server Error');
+    //         return;
+    //     }
+
+    //     console.log(withoutFilter);
+
+    //     res.render('product', { productList: data, originalUrl: `${req.baseUrl}?${qs.stringify(withoutFilter)}` });
+    // });
+    products.Product.find({name: {'$regex': name}}).sort({price: 1}).exec((err, data) => {
         if (err) {
             console.log(err);
             res.status(500).send('Internal Server Error');
             return;
         }
-
-        console.log(withoutFilter);
 
         res.render('product', { productList: data, originalUrl: `${req.baseUrl}?${qs.stringify(withoutFilter)}` });
     });

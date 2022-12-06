@@ -1,7 +1,7 @@
-const homeRouter = require('./home.route');
-const userRouter = require('./user.route');
-const productRouter = require('./product.route');
-const cartRouter = require('./cart.route');
+const homeRouter = require('./Home.route');
+const userRouter = require('./User.route');
+const productRouter = require('./Product.route');
+const cartRouter = require('./Cart.route');
 
 const route = (app) => {
     app.use('/', homeRouter);
