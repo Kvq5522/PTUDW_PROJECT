@@ -65,13 +65,22 @@
 
           <br />
 
-          <div>
-            <label for="sort">Sort by ↑:</label>
-            <select name="sort">
-              <option value="name">Name</option>
-              <option value="price">Price</option>
-              <option value="date">Date</option>
-            </select>
+          <div style="display: flex; gap: 10px;">
+            <div>
+              <label for="sort">Sort by ↑:</label>
+              <select name="sort">
+                <option value="name">Name</option>
+                <option value="price">Price</option>
+                <option value="date">Date</option>
+              </select>
+            </div>
+            <div>
+              <label for="sortValue">Value</label>
+              <select name="sortValue">
+                <option value="1">Ascending</option>
+                <option value="-1">Descending</option>
+              </select>
+            </div>
           </div>
 
           <br />

@@ -2,7 +2,7 @@ const products = require('../models/Product.model');
 const qs = require('qs');
 
 const getProductPage = (req, res) => {
-    const {sort, color, priceRange, ...withoutFilter} = req.query;
+    const {sort, color, priceRange, sortValue, ...withoutFilter} = req.query;
 
     let nameFilter = withoutFilter.name ? withoutFilter.name : '';
     nameFilter = nameFilter.charAt(0).toUpperCase() + nameFilter.slice(1);
@@ -10,10 +10,10 @@ const getProductPage = (req, res) => {
     let sortFilter = sort ? sort : 'name';
     let lowPivot = priceRange ? Number(priceRange.split('-')[0]) : 0;
     let highPivot = priceRange ? Number(priceRange.split('-')[1]) : 1e9;
-    
+    let sortValueFilter = sortValue ? Number(sortValue) : 1;    
 
     products.Product.find({name: {'$regex': nameFilter, '$options': 'i'}, color: {'$regex': colorFilter}, 
-    price: {$gte: lowPivot, $lte: highPivot}}).sort(`${sortFilter}`).exec((err, data) => {
+    price: {$gte: lowPivot, $lte: highPivot}}).sort([[`${sortFilter}`, sortValueFilter]]).exec((err, data) => {
         if (err) {
             console.log(err);
             res.status(500).send('Internal Server Error');
