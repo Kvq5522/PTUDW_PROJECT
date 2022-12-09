@@ -1,12 +1,17 @@
-const getSigninPage = (req, res) => {
-    res.render('signin');
+const getProfilePage = (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/auth/signin');
+        return;
+    }
+
+    res.render('profile', {profile: req.user});
 };
 
-const getSignupPage = (req, res) => {
-    res.render('signup');
+const updateProfile = (req, res) => {
+    res.send('developing...');
 };
 
 module.exports = {
-    getSigninPage,
-    getSignupPage
+    getProfilePage,
+    updateProfile
 };

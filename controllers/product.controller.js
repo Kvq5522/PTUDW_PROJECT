@@ -4,7 +4,7 @@ const qs = require('qs');
 const getProductPage = (req, res) => {
     const {sort, color, priceRange, sortValue, ...withoutFilter} = req.query;
 
-    let nameFilter = withoutFilter.name ? withoutFilter.name : '';
+    let nameFilter = withoutFilter.name ? withoutFilter.name : ''; 
     nameFilter = nameFilter.charAt(0).toUpperCase() + nameFilter.slice(1);
     let colorFilter = color ? color : '';
     let sortFilter = sort ? sort : 'name';

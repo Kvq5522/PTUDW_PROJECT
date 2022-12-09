@@ -1,4 +1,4 @@
-const getHomePage = (req, res) => {
+const getHomePage = (req, res) => {4
     res.render('index');
 };
 

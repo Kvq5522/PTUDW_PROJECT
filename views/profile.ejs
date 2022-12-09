@@ -1,0 +1,65 @@
+<%- include('header') %>
+
+<body>
+  <hr class="hr-to-paragraph" />
+  <div
+    class="container"
+    style="display: flex; justify-content: center; align-items: center"
+  >
+    <form
+      action="/product/add"
+      method="post"
+      style="
+        display: flex;
+        background-color: white;
+        gap: 50px;
+        padding: 50px;
+        border-radius: 10px;
+        width: calc(100vw - 100px);
+      "
+    >
+      <div style="display: flex">
+        <img
+          src="<%= profile.image_url %>"
+          alt="flower"
+          style="width: 400px; height: 400px; object-fit: cover"
+        />
+      </div>
+
+      <div
+        style="
+          display: flex;
+          flex-flow: column;
+          justify-content: space-between;
+          flex: 2;
+        "
+      >
+        <div>
+          <h5><%= profile.username %></h5>
+
+          <br />
+
+          <p><%= profile.phone_number %></p>
+
+          <br />
+
+          <p><%= profile.address %></p>
+        </div>
+
+
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            justify-self: flex-end;
+            gap: 100px;
+          "
+        >
+        <a href="/auth/signout" role="button"> Sign out </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+
+<%- include('footer') %>
