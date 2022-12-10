@@ -7,18 +7,13 @@ const main = async () => {
     // const docs = products.Product.aggregate([{$match: {'name': 'Rose'}}])
     // console.log(docs.name);
 
-    const string = '';
+    const array = [
+        '638ef16c59bca6b785a7531e', '638ef21a59bca6b785a75328'
+    ]
 
-    
-    products.Product.find({name: {'$regex': string}}, (err, data) => {
-        if (err) {
-            console.log(err);
-        } 
+    const result = await products.Product.find({'_id': {$in: array}});
 
-        for (let i = 0; i < data.length; i++) {
-            console.log(data[i].name);
-        }
-    });
+    console.log(result);
 };
 
 main();

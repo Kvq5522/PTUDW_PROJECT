@@ -132,7 +132,7 @@
               <div class="card-body">
                 <h5 class="card-title"><%= productList[i].name %></h5>
                 <p class="card-text"><%= productList[i].price %>$</p>
-                <a href="/product/add/<%= productList[i].id %>" role="button"
+                <a href="/user/cart/add/<%= productList[i].id %>?price=<%= productList[i].price %>" role="button"
                   ><i class="fa-solid fa-cart-shopping" style="color: #ff8f52"></i
                 ></a>
               </div>

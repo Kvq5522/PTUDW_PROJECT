@@ -8,8 +8,6 @@
     style="display: flex; justify-content: center; align-items: center"
   >
     <form
-      action="/product/add"
-      method="post"
       style="
         display: flex;
         background-color: white;
@@ -47,10 +45,14 @@
             gap: 100px;
           "
         >
-          <h5>Price: <%= item.price %>$</h5>
-          <button class="cart-button">
+          <h5>Price: <div name="price"><%= item.price %>$</div></h5>
+          <!-- <button class="cart-button">
             <i class="fa-solid fa-cart-shopping"></i> Add to cart
-          </button>
+          </button> -->
+          <a href="/user/cart/add/<%= item.id %>?price=<%= item.price %>">
+              <i class="fa-solid fa-cart-shopping" style="color: #FF8F52"></i>
+          </a>
+          
         </div>
       </div>
     </form>
