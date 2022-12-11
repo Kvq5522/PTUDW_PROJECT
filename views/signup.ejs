@@ -91,18 +91,12 @@
 
             <div class="form-row">
               <div class="col-lg-7">
-                <!-- <button
-                  type="button"
-                  class="btn1 mt3 mb-5"
-                  style="background-color: white; color: #ff8f52"
-                >
-                  Register
-                </button> -->
                 <input
                   type="submit"
                   value="Register"
                   class="btn1 mt3 mb-5"
                   style="background-color: white; color: #ff8f52"
+                  name="submit"
                 />
               </div>
             </div>
@@ -134,8 +128,8 @@
         const password = document.getElementsByName("password");
         const password_check = document.getElementsByName("password-check");
         const phone = document.getElementsByName("phone");
-        const address = document.getElementsByName("address");
         const user_error = document.getElementsByName("user-error");
+        const submit = document.getElementsByName("submit");
 
         const checkPasswordStrength = (string) => {
           let strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
@@ -168,14 +162,6 @@
           } else {
             user_error.innerText = "Phone number is not valid";
             return 0;
-          }
-        };
-
-        const validateForm = () => {
-          let x = document.forms["myForm"]["fname"].value;
-
-          if (x == "") {
-            return false;
           }
         };
   </script>

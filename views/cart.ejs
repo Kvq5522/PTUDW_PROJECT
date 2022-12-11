@@ -5,7 +5,6 @@
 
   <div
     style="
-      height: calc(100vh - 251px);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -13,42 +12,48 @@
       flex-wrap: wrap;
     "
   >
-    <div style="background-color: white; width: 600px; padding: 20px; display: flex;">
+    <div
+      style="
+        background-color: white;
+        width: 600px;
+        padding: 20px;
+        display: flex;
+      "
+    >
       <h4>Your cart</h4>
-      
+
       <div>
-        <form style="display: flex; flex-flow: column; gap: 20px ;" >
+        <form style="display: flex; flex-flow: column; gap: 20px">
           <% for (let i = 0; i < cartDetail.length; i++) { %>
-            <div style="display: flex; gap: 10px; padding: 20px">
-              <img
-                src="<%= cartDetail[i].image_url %>"
-                alt="flower"
-                style="object-fit: cover; width: 80px; height: 80px"
-              />
-              <div
-                style="
-                  display: flex;
-                  flex-flow: column;
-                  flex: 1;
-                  justify-content: space-between;
-                "
-              >
-                <div style="display: flex; justify-content: space-between">
-                  <h6><%= cartDetail[i].name %></h6>
-                  <!-- <button class="icon-button">
-                    <i class="fa-solid fa-trash-can"></i>
-                  </button> -->
-                  <a href="/user/cart/delete/<%= cartDetail[i].id %>?price=<%= cartDetail[i].price %>">
-                    <i class="fa-solid fa-trash-can"></i>
-                  </a>
-                </div>
-  
-                <div style="display: flex; justify-content: flex-end">
-                  <h6>Cost: <%= cartDetail[i].price %>$</h6>
-                </div>
+          <div style="display: flex; gap: 10px; padding: 20px">
+            <img
+              src="<%= cartDetail[i].image_url %>"
+              alt="flower"
+              style="object-fit: cover; width: 80px; height: 80px"
+            />
+            <div
+              style="
+                display: flex;
+                flex-flow: column;
+                flex: 1;
+                justify-content: space-between;
+              "
+            >
+              <div style="display: flex; justify-content: space-between">
+                <h6><%= cartDetail[i].name %></h6>
+                <a
+                  href="/user/cart/delete/<%= cartDetail[i].id %>?price=<%= cartDetail[i].price %>"
+                >
+                  <i class="fa-solid fa-trash-can" style="color: #ff8f52"></i>
+                </a>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end">
+                <h6>Cost: <%= cartDetail[i].price %>$</h6>
               </div>
             </div>
-          <% } %> 
+          </div>
+          <% } %>
         </form>
       </div>
     </div>
@@ -64,7 +69,7 @@
       <form action="./checkout" method="post">
         <h5>Total: <%= total %>$</h5>
 
-        <button
+        <!-- <button
           style="
             background-color: #ff8f52;
             border: none;
@@ -73,7 +78,23 @@
           "
         >
           Checkout
-        </button>
+        </button> -->
+        <a
+          href="/user/cart/order/input"
+          role="button"
+          style="
+            background-color: #ff8f52;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            padding: 5px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white
+          "
+        >
+          Checkout
+        </a>
       </form>
     </div>
   </div>

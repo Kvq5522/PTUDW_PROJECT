@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/User.controller');
-const cartRouter = require('./Cart.route');
 
 router.get('/', (req, res) => {
     if (!req.isAuthenticated()) {
@@ -30,6 +29,14 @@ router.get('/cart/add/:productID', (req, res) => {
 
 router.get('/cart/delete/:productID', (req, res) => {
     controller.deleteProductFromCart(req, res);
+});
+
+router.get('/cart/order/input', (req, res) => {
+    controller.getOrderInputPage(req, res);
+});
+
+router.post('/cart/order/submit', (req, res) => {
+    controller.submitOrder(req, res);
 });
 
 
