@@ -2,9 +2,6 @@
 
 <body>
   <hr class="hr-to-paragraph" />
-
-  <br />
-
   <!-- <div style="height: calc(100vh - 251px)">
     <div
       class="container fixed-content"
@@ -60,17 +57,62 @@
 
   <div style="display: flex;">
     <div style="flex-flow: column; width: calc(100vw * 0.3);">
-      <form action="/product" method="get" class="container" style="justify-content: center; width: calc((100vw * 0.3)); padding: 10px">
+      <form action="/product" method="get" class="container" style="justify-content: center; width: calc((100vw * 0.3)); padding: 10px; gap: 10px;">
           <div style="display: flex;">
-            <input type="text" name="search-name" style=" width: calc((100vw * 0.3) * 0.8)" placeholder="Product Name?">
+            <input type="text" name="name" style=" width: calc((100vw * 0.3) * 0.8)" placeholder="Product Name?">
             <input type="submit" value="Submit" style=" width: calc((100vw * 0.3) * 0.2)">
+          </div>
+
+          <br />
+
+          <div style="display: flex; gap: 10px;">
+            <div>
+              <label for="sort">Sort by ↑:</label>
+              <select name="sort">
+                <option value="name">Name</option>
+                <option value="price">Price</option>
+                <option value="date">Date</option>
+              </select>
+            </div>
+            <div>
+              <label for="sortValue">Value</label>
+              <select name="sortValue">
+                <option value="1">Ascending</option>
+                <option value="-1">Descending</option>
+              </select>
+            </div>
+          </div>
+
+          <br />
+
+          <div>
+            <label for="color">Filter by Color:</label>
+            <select name="color">
+              <option value="">All</option>
+              <option value="Red">Red</option>
+              <option value="Pink">Pink</option>
+              <option value="Yellow">Yellow</option>
+              <option value="Orange">Orange</option>
+              <option value="White">White</option>
+              <option value="Blue">Blue</option>
+              <option value="Purple">Purple</option>
+            </select>
+          </div>
+
+          <br />
+
+          <div>
+            <label for="priceRange">Filter by Price:</label>
+            <select name="priceRange">
+              <option value="0-1e9">All</option>
+              <option value="0-1000">0-1000</option>
+              <option value="1000-2500">1000-2500</option>
+              <option value="2500-5000">2500-5000</option>
+              <option value="5000-10000">5000-10000</option>
+            </select>
           </div>
       </form>
 
-      <form action="/product" method="get" class="container">
-        <button name="sort-name-asc" value="on"><i class="fas fa-sort-alpha-down"></i></button>
-        <button name="sort-name-dsc" value="on"><i class="fas fa-sort-alpha-up"></i></button>
-      </form>
     </div>
 
     <div style="flex-flow: column; width: calc(100vw * 0.7);">
@@ -85,12 +127,12 @@
                 ><img
                   src="<%= productList[i].image_url %>"
                   alt="flower"
-                  style="width: 75%"
+                  style="width: 192px; height: 192px; object-fit: cover; object-position: center center; border-radius: 50"
               /></a>
               <div class="card-body">
                 <h5 class="card-title"><%= productList[i].name %></h5>
                 <p class="card-text"><%= productList[i].price %>$</p>
-                <a href="/product/add/<%= productList[i].id %>" role="button"
+                <a href="/user/cart/add/<%= productList[i].id %>?price=<%= productList[i].price %>" role="button"
                   ><i class="fa-solid fa-cart-shopping" style="color: #ff8f52"></i
                 ></a>
               </div>
@@ -102,6 +144,7 @@
     </div>
   </div>
 
+  <br />
   <br />
 </body>
 

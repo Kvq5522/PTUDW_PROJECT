@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const products = require('./Product.model');
 
 const cartSchema = new mongoose.Schema({
-    items: [products.productSchema],
+    items: [String],
     total: {
         type: Number,
         default: 0

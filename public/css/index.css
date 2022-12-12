@@ -84,67 +84,102 @@ body {
   color: white;
 }
 
-.about-1{
-  margin: 30px;
-  padding: 5px;
-}
-.about-1 h1{
-  text-align: center;
-  color: black;
-  font-weight: bold;
-}
-.about-1 p{
-  text-align: center;
-  padding: auto;
-  color: #fff;
-
-}
-.about-item{
-  margin-bottom: 20px;
-  background-color: white;
-  padding: 80px, 30px;
-  box-shadow: 0 0 9px rgba(0, 0, 0, .6);
-}
-.about-item i{
-  font-size: 43px;
-  margin: 0;
-}
-.about-item h3{
-  font-size: 25px;
-  margin-bottom: 10px;
-}
-.about-item hr{
-  width: 46px;
-  height: 3px;
+.container_profile{
+  background: #fff;
+  width: 540px;
+  height: 450px;
   margin: 0 auto;
-  background-color: orange;
-  border: nome;
+  position: relative;
+  margin-top: 10%;
+  box-shadow: 2px 5px 20px rgba(119, 119, 119, .5);
 }
-.about-item p{
-  margin-top: 20px;
-
+.leftbox{
+  float: left;
+  top: -5%;
+  left: 5%;
+  position: absolute;
+  width: 15%;
+  height: 110%;
+  background: #FF8F52;
+  box-shadow: 3px 3px 10px rgba(119, 119, 119, .5);
+  border: .1em solid #fff;
 }
-.about-item:hover{
-  background-color: orange;
-}
-.about-item:hover i,
-.about-item:hover h3,
-.about-item:hover p{
+nav a{
+  list-style: none;
+  padding: 35px;
   color: #fff;
+  font-size: 1.1em;
+  display: block;
+  transition: all .3s ease-in-out;
+}
+nav a:hover{
+  color: rgb(158, 115, 35);
+  cursor: pointer;
+  transform: scale(1.2);
+} 
+nav a:first-child{
+  margin-top: 7px;
+}
+nav a.active{
+  color: rgb(158, 115, 35);
+}
+.rightbox{
+  width: 60%;
+  margin-left: 27%;
+  padding-top: 5px;
+}
+.tabShow{
+  transition: all .5s ease-in;
+  width: 80%;
+  position: absolute;
+
+}
+h1{
+  font-family: "Montserrat", sans-serif;
+  color: #FF8F52;
+  font-size: 1.2em;
+  margin-top: 40px;
+  margin-bottom: 35px;
+}
+h2{
+  color: #b8b8b8;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin-left: 2px;
+  margin-top: 10px;
+}
+.input, p{
+  border: 0;
+  border-bottom: 1px solid #FF8F52;
+  width: 80%;
+  font-family: "montserrat", sans-serif;
+  font-size: .7em;
+  padding: 7px 0;
+  color: #070707;
+  outline: none; 
+}
+span{
+  font-size: .7em;
+  color: #777;
+
+}
+.btn_profile{
+  font-family:"roboto", sans-serif ;
+  text-transform: uppercase;
+  font-size: 15px;
+  border: 0;
+  color: #fff;
+  background: orange;
+  padding: 7px 15px;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, .2);
+  cursor: pointer;
+  margin-top: 15px; 
+}
+.tabShow{
+  display: none;
+
 }
 
-.about-item:hover hr{
-  background-color: orange;
-}
-.about-item:hover i{
-  transform: translateY(-20px);
-}
-.about-item:hover i,
-.about-item:hover h3,
-.about-item:hover p{
-  transition: all 400ms ease-in-out;
-}
-footer{
-  background: #212226;
-  padding: 20px;
-}
+

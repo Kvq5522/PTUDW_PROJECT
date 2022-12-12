@@ -1,17 +1,43 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/user.controller');
+const controller = require('../controllers/User.controller');
 
 router.get('/', (req, res) => {
-    controller.getSigninPage(req, res);
+    if (!req.isAuthenticated()) {
+        res.redirect('/auth/signin');
+        return;
+    }
+
+    res.redirect('/user/profile');
 });
 
-router.get('/signin', (req, res) => {
-    controller.getSigninPage(req, res);
+router.get('/profile', (req, res) => {
+    controller.getProfilePage(req, res);
 });
 
-router.get('/signup', (req, res) => {
-    controller.getSignupPage(req, res);
+router.post('/profile', (req, res) => {
+    controller.updateProfile(req, res);
 });
+
+router.get('/cart', (req, res) => {
+    controller.getCartPage(req, res);
+});
+
+router.get('/cart/add/:productID', (req, res) => {
+    controller.addProductToCart(req, res);
+});
+
+router.get('/cart/delete/:productID', (req, res) => {
+    controller.deleteProductFromCart(req, res);
+});
+
+router.get('/cart/order/input', (req, res) => {
+    controller.getOrderInputPage(req, res);
+});
+
+router.post('/cart/order/submit', (req, res) => {
+    controller.submitOrder(req, res);
+});
+
 
 module.exports = router;

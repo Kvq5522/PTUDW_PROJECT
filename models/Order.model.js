@@ -14,7 +14,7 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    items: [products.productSchema],
+    items: [String],
     total: {
         type: Number,
         required: true
@@ -26,7 +26,8 @@ const orderSchema = new mongoose.Schema({
     isDeleted: {
         type: Boolean,
         default: false
-    }
+    }, 
+    shippingDate: Date
 });
 
 const Order = mongoose.model('Order', orderSchema);
