@@ -3,7 +3,7 @@ const getHomePage = (req, res) => {
 };
 
 const getAboutPage = (req, res) => {
-    res.send('about');
+    res.render('about');
 }
 
 module.exports = {
