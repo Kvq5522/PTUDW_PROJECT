@@ -1,4 +1,4 @@
-<%- include('header') %>
+<!-- <%- include('header') %>
 
 <body>
   <hr class="hr-to-paragraph" />
@@ -60,6 +60,130 @@
       </div>
     </form>
   </div>
+</body>
+
+<%- include('footer') %> -->
+
+<%- include('header') %>
+
+<body>
+  <div class="container_profile">
+    <div class="leftbox" style="display: flex">
+      <nav style="display: flex; gap: 20px">
+        <a
+          onclick="tabs(0)"
+          class="tab active"
+          style="color: white; flex-flow: row"
+        >
+          <i class="fa fa-user"></i>
+        </a>
+        <a onclick="tabs(1)" class="tab" style="color: white; flex-flow: row">
+          <i class="fa fa-tasks"></i>
+        </a>
+      </nav>
+    </div>
+    <div class="rightbox">
+      <div class="privacy tabShow">
+        <h1>
+          Welcome back, <%= profile.username.slice(0,
+          profile.username.indexOf('@')) %>.
+        </h1>
+        <img
+          src="<%= profile.image_url %>"
+          alt="avatar"
+          style="
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            object-position: center center;
+            border-radius: 50;
+          "
+        />
+        <br />
+        <br />
+        <a
+          href="/auth/signout"
+          class="btn_profile"
+          role="button"
+          style="text-decoration: none;"
+          >Good bye!</a
+        >
+      </div>
+
+      <div class="Profile tabShow">
+        <form action="/user/update_profile" method="post">
+          <h1>Update your profile</h1>
+          <h2>Username</h2>
+          <input type="text" class="input" value="<%= profile.username %>" readonly />
+          <h2>Password</h2>
+          <!-- <input
+            type="text"
+            class="input"
+            placeholder="*****"
+            name="password"
+            id="password"
+          /> -->
+          <h2>Phone number</h2>
+          <input
+            type="text"
+            class="input"
+            placeholder="<%= profile.phone_number %>"
+            name="phone_number"
+            id="phone_number"
+          />
+          <h2>Address</h2>
+          <input
+            type="text"
+            class="input"
+            placeholder="<%= profile.address %>"
+            name="address"
+            id="address"
+          />
+          <h2>Avatar</h2>
+          <input
+            type="file"
+            class="input"
+            accept="image/*"
+            name="avatar"
+            id="avatar"
+          />
+          <input type="hidden" name="dataUrl" id="dataUrl" />
+          <div id="test">
+
+          </div>
+          <br />
+          <input type="submit" value="Update" class="btn_profile" />
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    const file = document.getElementById("avatar");
+    const inputFile = document.getElementById("dataUrl");
+    const tabBtn = document.querySelectorAll(".tab");
+    const tab = document.querySelectorAll(".tabShow");
+
+    file.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const test = document.getElementById("test");
+        test.value = reader.result;
+        inputFile.value = reader.result;
+        console.log(inputFile.value);
+      };
+    });
+
+    function tabs(panelIndex) {
+      tab.forEach(function (node) {
+        node.style.display = "none";
+      });
+      tab[panelIndex].style.display = "block";
+    }
+
+    tabs(0);
+  </script>
 </body>
 
 <%- include('footer') %>

@@ -15,7 +15,7 @@ router.get('/profile', (req, res) => {
     controller.getProfilePage(req, res);
 });
 
-router.post('/profile', (req, res) => {
+router.post('/update_profile', (req, res) => {
     controller.updateProfile(req, res);
 });
 

@@ -1,5 +1,7 @@
 const carts = require('../models/Cart.model');
 const products = require('../models/Product.model');
+const users = require('../models/User.model');
+const encrypt = require('mongoose-encryption');
 const orders = require('../models/Order.model');
 
 const getProfilePage = (req, res) => {
@@ -12,7 +14,26 @@ const getProfilePage = (req, res) => {
 };
 
 const updateProfile = (req, res) => {
-    res.send('developing...');
+    const password = req.body.password ? req.body.password : req.user.password;
+    const address = req.body.address ? req.body.address : req.user.address;
+    const phone_number = req.body.phone_number ? req.body.phone_number : req.user.phone_number;
+    const dataUrl = req.body.dataUrl ? req.body.dataUrl : req.user.image_url;
+
+    const update = {
+        address: address,
+        phone_number: phone_number,
+        image_url: dataUrl
+    }
+
+    users.User.findByIdAndUpdate(req.user._id, update, (err, data) => {
+        if (err || !data) {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+
+        res.redirect('/user/profile');
+    });
 };
 
 const getCartPage = async (req, res) => {
@@ -50,7 +71,7 @@ const addProductToCart = (req, res) => {
     }
 
     req.user.save();
-    res.end();
+    res.redirect('back')
 };
 
 const deleteProductFromCart = (req, res) => {
