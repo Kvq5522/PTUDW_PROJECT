@@ -11,27 +11,32 @@ const getSigninPage = (req, res) => {
     res.redirect('/user/profile');
 };
 
-const validSignIn = (req, res) => {
+const validSignIn = (req, res, next) => {
     const user = new users.User({
         username: req.body.username,
         password: req.body.password
     });
 
-    req.login(user, (err) => {
+    passport.authenticate('local', (err, user, info) => {
         if (err) {
             res.render('signin', {message: 'Result: ' + err.message});
             return;
         }
 
-        passport.authenticate('local')(req, res, () => {
+        if (!user) {
+            res.render('signin', {message: 'Result: ' + info.message});
+            return;
+        }
+
+        req.login(user, (err) => {
             if (err) {
                 res.render('signin', {message: 'Result: ' + err.message});
                 return;
             }
 
-            res.redirect('/user');
+            res.redirect('/user/profile');
         });
-    });
+    })(req, res, next);
 };
 
 const getSignupPage = (req, res) => {

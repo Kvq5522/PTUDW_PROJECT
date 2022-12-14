@@ -1,86 +1,19 @@
-<!-- <%- include('header') %>
-
-<body>
-  <hr class="hr-to-paragraph" />
-  <div
-    class="container"
-    style="display: flex; justify-content: center; align-items: center"
-  >
-    <form
-      action="/product/add"
-      method="post"
-      style="
-        display: flex;
-        background-color: white;
-        gap: 50px;
-        padding: 50px;
-        border-radius: 10px;
-        width: calc(100vw - 100px);
-      "
-    >
-      <div style="display: flex">
-        <img
-          src="<%= profile.image_url %>"
-          alt="flower"
-          style="width: 400px; height: 400px; object-fit: cover"
-        />
-      </div>
-
-      <div
-        style="
-          display: flex;
-          flex-flow: column;
-          justify-content: space-between;
-          flex: 2;
-        "
-      >
-        <div>
-          <h5><%= profile.username %></h5>
-
-          <br />
-
-          <p><%= profile.phone_number %></p>
-
-          <br />
-
-          <p><%= profile.address %></p>
-        </div>
-
-
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            justify-self: flex-end;
-            gap: 100px;
-          "
-        >
-        <a href="/auth/signout" role="button"> Sign out </a>
-        </div>
-      </div>
-    </form>
-  </div>
-</body>
-
-<%- include('footer') %> -->
-
 <%- include('header') %>
 
 <body>
+  <hr class="hr-to-paragraph" />
+
   <div class="container_profile">
-    <div class="leftbox" style="display: flex">
-      <nav style="display: flex; gap: 20px">
-        <a
-          onclick="tabs(0)"
-          class="tab active"
-          style="color: white; flex-flow: row"
-        >
-          <i class="fa fa-user"></i>
-        </a>
-        <a onclick="tabs(1)" class="tab" style="color: white; flex-flow: row">
-          <i class="fa fa-tasks"></i>
-        </a>
-      </nav>
+    <div class="leftbox" style="display: flex; flex-flow: column; justify-content: center; align-items: center;">
+      <a onclick="tabs(0)" class="tab active" style="color: white;">
+        <i class="fa fa-user"></i>
+      </a>
+
+      <h2 style="visibility: hidden"></h2>
+
+      <a onclick="tabs(1)" class="tab" style="color: white">
+        <i class="fa fa-tasks"></i>
+      </a>
     </div>
     <div class="rightbox">
       <div class="privacy tabShow">
@@ -92,37 +25,43 @@
           src="<%= profile.image_url %>"
           alt="avatar"
           style="
-            width: 300px;
-            height: 300px;
+            width: calc(100vw * 0.6 * 0.25);
+            height: calc(100vw * 0.6 * 0.25);
             object-fit: cover;
             object-position: center center;
             border-radius: 50;
           "
         />
-        <br />
-        <br />
+
+        <h2 style="visibility: hidden"></h2>
+
         <a
           href="/auth/signout"
           class="btn_profile"
           role="button"
-          style="text-decoration: none;"
+          style="text-decoration: none"
           >Good bye!</a
         >
       </div>
 
       <div class="Profile tabShow">
-        <form action="/user/update_profile" method="post">
+        <form action="/user/update_profile" method="post" style="gap: 10px">
           <h1>Update your profile</h1>
           <h2>Username</h2>
-          <input type="text" class="input" value="<%= profile.username %>" readonly />
-          <h2>Password</h2>
-          <!-- <input
+          <input
             type="text"
+            class="input"
+            value="<%= profile.username %>"
+            readonly
+          />
+          <h2>Password</h2>
+          <input
+            type="password"
             class="input"
             placeholder="*****"
             name="password"
             id="password"
-          /> -->
+          />
           <h2>Phone number</h2>
           <input
             type="text"
@@ -148,42 +87,39 @@
             id="avatar"
           />
           <input type="hidden" name="dataUrl" id="dataUrl" />
-          <div id="test">
+          <h2 style="visibility: hidden"></h2>
 
-          </div>
-          <br />
           <input type="submit" value="Update" class="btn_profile" />
         </form>
       </div>
     </div>
   </div>
-  <script>
-    const file = document.getElementById("avatar");
-    const inputFile = document.getElementById("dataUrl");
-    const tabBtn = document.querySelectorAll(".tab");
-    const tab = document.querySelectorAll(".tabShow");
-
-    file.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        const test = document.getElementById("test");
-        test.value = reader.result;
-        inputFile.value = reader.result;
-        console.log(inputFile.value);
-      };
-    });
-
-    function tabs(panelIndex) {
-      tab.forEach(function (node) {
-        node.style.display = "none";
-      });
-      tab[panelIndex].style.display = "block";
-    }
-
-    tabs(0);
-  </script>
 </body>
 
 <%- include('footer') %>
+
+<script>
+  const file = document.getElementById("avatar");
+  const inputFile = document.getElementById("dataUrl");
+  const tabBtn = document.querySelectorAll(".tab");
+  const tab = document.querySelectorAll(".tabShow");
+
+  file.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      inputFile.value = reader.result;
+      console.log(inputFile.value);
+    };
+  });
+
+  function tabs(panelIndex) {
+    tab.forEach(function (node) {
+      node.style.display = "none";
+    });
+    tab[panelIndex].style.display = "block";
+  }
+
+  tabs(0);
+</script>

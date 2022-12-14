@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const findOrCreate = require('mongoose-findorcreate');
-const encrypt = require('mongoose-encryption');
 const carts = require('./Cart.model');
 
 const userSchema = new mongoose.Schema({
@@ -38,7 +37,6 @@ const userSchema = new mongoose.Schema({
 
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
-userSchema.plugin(encrypt, { secret: process.env.SECRET_CODE, encryptedFields: ['password'] });
 
 const User = mongoose.model('User', userSchema);
 

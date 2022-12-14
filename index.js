@@ -27,8 +27,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(users.User.createStrategy());
-passport.serializeUser(users.User.serializeUser());
-passport.deserializeUser(users.User.deserializeUser());
+passport.serializeUser(function (user, done) {      
+    done(null, user.id);
+});
+passport.deserializeUser(function (id, done) {      
+    users.User.findById(id, function (err, user) {
+        done(err, user);
+    });
+});
 
 app.set('view engine', 'ejs');
 

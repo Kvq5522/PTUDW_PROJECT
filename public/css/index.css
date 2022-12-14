@@ -84,39 +84,6 @@ body {
   color: white;
 }
 
-.dropbtn {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #FF8F52;}
-
 .about-1{
   margin: 30px;
   padding: 5px;
@@ -259,16 +226,51 @@ body {
 
 #footer {
   background-color: rgb(68, 68, 68);
-  height: 200px;
   width: 100%;
   color: white;
+  position: fixed;
+  bottom: 0;
 }
 
+.dropbtn {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #FF8F52;}
+
 .container_profile{
-  background: #fff;
-  width: calc(100vw * 0.4);
-  height: calc(100vw * 0.3);
+  background: #fff; 
+  width: calc(100vw * 0.6);
   margin: 0 auto;
+  margin-right: 0px;
+  right: calc(100vw * 0.2);
   position: relative;
   margin-top: 5%;
   box-shadow: 2px 5px 20px rgba(119, 119, 119, .5);
@@ -278,21 +280,22 @@ body {
   float: left;
   position: absolute;
   width: calc(100vw * 0.067);
-  height: calc(100vw * 0.3);
+  height: calc(100%);
   background: #FF8F52;
   box-shadow: 3px 3px 10px rgba(119, 119, 119, .5);
   border: .1em solid #fff;
 }
 
 .rightbox{
-  width: calc(100vw * 0.4);
-  margin-left: 27%;
-  padding-top: 5px;
+  width: calc(100vw * (0.6 - 0.067));
+  gap: 10px;
+  padding: 20px;
+  margin-left: calc(100vw * 0.067 + 10px);
 }
+
 .tabShow{
   transition: all .5s ease-in;
-  width: 80%;
-  position: absolute;
+  width: 100%;
 }
 
 h1{
@@ -327,7 +330,6 @@ h2{
 span{
   font-size: .7em;
   color: #777;
-
 }
 
 .btn_profile{
@@ -341,10 +343,4 @@ span{
   padding: 7px 15px;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, .2);
   cursor: pointer;
-  margin-top: 15px; 
-}
-
-.tabShow{
-  display: none;
-
 }

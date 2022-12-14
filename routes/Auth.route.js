@@ -6,8 +6,8 @@ router.get('/signin', (req, res) => {
     controller.getSigninPage(req, res);
 });
 
-router.post('/signin', (req, res) => {
-    controller.validSignIn(req, res);
+router.post('/signin', (req, res, next) => {
+    controller.validSignIn(req, res, next);
 });
 
 router.get('/signup', (req, res) => {
