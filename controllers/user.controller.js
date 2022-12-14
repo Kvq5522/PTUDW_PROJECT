@@ -12,26 +12,24 @@ const getProfilePage = async (req, res) => {
     res.render('profile', {profile: req.user});
 };
 
-const updateProfile = async (req, res) => {
+const updateProfile = (req, res) => {
     const newPassword = req.body.password ? req.body.password : req.user.password;
     const newAddress = req.body.address ? req.body.address : req.user.address;
     const new_phone_number = req.body.phone_number ? req.body.phone_number : req.user.phone_number;
     const newDataUrl = req.body.dataUrl ? req.body.dataUrl : req.user.image_url;
 
-    req.user.setPassword(newPassword, (err, user) => {
+    req.user.setPassword(newPassword, async (err, user) => {
         if (err) {
             console.log(err);
             return;
         }
+        req.user.address = newAddress;
+        req.user.phone_number = new_phone_number;
+        req.user.image_url = newDataUrl;
+        await req.user.save();
 
-        req.user.save();
+        res.redirect('/user/profile');
     });
-    req.user.address = newAddress;
-    req.user.phone_number = new_phone_number;
-    req.user.image_url = newDataUrl;
-    await req.user.save();
-
-    res.redirect('/user/profile');
 };
 
 const getCartPage = async (req, res) => {
