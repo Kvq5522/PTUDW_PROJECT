@@ -120,11 +120,39 @@
           <% } %>
         </div>
       </form>
+
+      <div style="display: flex; gap: 10px; justify-content: center">
+        <a
+          href="/product?<%= pagination.curQuery %>page=<%= pagination.prevPage %>"
+          style="text-decoration: none; color: #ff8f52"
+          id="prev-<%= pagination.prevPage %>"
+          ><i class="fa fa-arrow-left" aria-hidden="true"></i>Prev</a
+        >
+        <% for (let i = 1; i <= pagination.maxPage ; i++) { %>
+        <a
+          href="/product?<%= pagination.curQuery %>page=<%= i %>"
+          style="text-decoration: none; color: #ff8f52"
+          id="page-<%= i %>"
+        >
+          <%= i %>
+        </a>
+        <% } %>
+        <a
+          href="/product?<%= pagination.curQuery %>page=<%= pagination.nextPage %>"
+          style="text-decoration: none; color: #ff8f52;"
+          id="next-<%= pagination.nextPage %>"
+          >Next<i class="fa fa-arrow-right" aria-hidden="true"></i></a
+        >
+      </div>
     </div>
   </div>
 
   <br />
   <br />
 </body>
+
+<script>
+  
+</script>
 
 <%- include('footer') %>

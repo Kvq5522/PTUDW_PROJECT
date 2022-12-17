@@ -117,7 +117,8 @@ const submitOrder = async (req, res) => {
     const date = req.body.shippingDate;
 
     const newOrder = new orders.Order({
-        username: req.user._id,
+        username: req.user.username,
+        userID: req.user._id,
         phone_number: req.user.phone_number,
         address: address,
         items: req.user.cart.items,

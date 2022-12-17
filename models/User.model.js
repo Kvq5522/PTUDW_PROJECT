@@ -32,7 +32,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "recovery_string"
     },
-    cart: carts.cartSchema
+    cart: carts.cartSchema,
+    registration: {
+        type: Date,
+        default: Date.now()
+    }
 });
 
 userSchema.plugin(passportLocalMongoose);
