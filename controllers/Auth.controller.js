@@ -54,7 +54,7 @@ const validSignUp = (req, res) => {
     const phone = req.body.phone;
     const address = req.body.address;
 
-    users.User.register({username: email, password: password, phone_number: phone, address: address}, password, (err, user) => {
+    users.User.register({username: email, phone_number: phone, address: address}, password, (err, user) => {
         if (err) {
             console.log(err);   
             res.render('signup', {message: 'Result: ' + err.message});
