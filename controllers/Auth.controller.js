@@ -28,6 +28,11 @@ const validSignIn = (req, res, next) => {
             return;
         }
 
+        if (user.ban) {
+            res.render('signin', {message: 'Result: Your account has been banned!'});
+            return;
+        }
+
         req.login(user, (err) => {
             if (err) {
                 res.render('signin', {message: 'Result: ' + err.message});

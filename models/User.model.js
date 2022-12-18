@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
     registration: {
         type: Date,
         default: Date.now()
+    },
+    ban: {
+        type: Boolean,
+        default: false
     }
 });
 
