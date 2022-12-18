@@ -1,7 +1,7 @@
 const homeRouter = require('./home.route');
 const userRouter = require('./user.route');
 const productRouter = require('./product.route');
-const authRouter = require('./auth.route');
+const authRouter = require('./Auth.route');
 
 const route = (app) => {
     app.use('/', homeRouter);
