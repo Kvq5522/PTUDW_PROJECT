@@ -103,7 +103,7 @@ const getOrderInputPage = async (req, res) => {
     }
 
     let fetchedProducts = await products.Product.find({'_id': {$in: req.user.cart.items}});
-
+    
     res.render('order', {cartDetail: fetchedProducts.length > 0 ? fetchedProducts : []});
 };
 

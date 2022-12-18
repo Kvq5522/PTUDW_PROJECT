@@ -1,6 +1,6 @@
 const exrpess = require('express');
 const router = exrpess.Router();
-const controller = require('../controllers/Auth.controller');
+const controller = require('../controllers/auth.controller');
 
 router.get('/signin', (req, res) => {
     controller.getSigninPage(req, res);

@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
     await controller.getProductPage(req, res);
 });
 
-router.get('/:productID', async (req, res) => {
+router.get('/detail/:productID', async (req, res) => {
     await controller.getProductDetailPage(req, res);
 });
 
