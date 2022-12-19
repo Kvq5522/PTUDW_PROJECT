@@ -8,21 +8,23 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
       flex-wrap: wrap;
     "
   >
     <div
       style="
         background-color: white;
-        width: 600px;
+        width: calc(100vw * 0.4);
         padding: 20px;
         display: flex;
+        gap: 10px;
       "
     >
       <h4>Your cart</h4>
 
       <div>
+        <br />
+
         <form style="display: flex; flex-flow: column; gap: 20px">
           <% for (let i = 0; i < cartDetail.length; i++) { %>
           <div style="display: flex; gap: 10px; padding: 20px">
@@ -62,35 +64,25 @@
       style="
         background-color: white;
         height: max-content;
-        width: 300px;
+        width: calc(100vw * 0.2);
         padding: 10px;
       "
     >
       <form action="./checkout" method="post">
         <h5>Total: <%= total %>$</h5>
 
-        <!-- <button
-          style="
-            background-color: #ff8f52;
-            border: none;
-            border-radius: 8px;
-            width: 100%;
-          "
-        >
-          Checkout
-        </button> -->
         <a
           href="/user/cart/order/input"
           role="button"
           style="
+            width: 100px;
+            justify-content: center;
             background-color: #ff8f52;
+            color: white;
             border: none;
-            border-radius: 8px;
-            width: 100%;
-            padding: 5px;
-            border-radius: 10px;
+            border-radius: 5px;
             text-decoration: none;
-            color: white
+            padding: 3px;
           "
         >
           Checkout

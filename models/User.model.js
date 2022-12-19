@@ -1,17 +1,12 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const findOrCreate = require('mongoose-findorcreate');
-const encrypt = require('mongoose-encryption');
 const carts = require('./Cart.model');
 
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true  
-    },
-    password: {
-        type: String,
-        required: true
     },
     role: {
         type: String,
@@ -33,12 +28,19 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "recovery_string"
     },
-    cart: carts.cartSchema
+    cart: carts.cartSchema,
+    registration: {
+        type: Date,
+        default: Date.now()
+    },
+    ban: {
+        type: Boolean,
+        default: false
+    }
 });
 
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
-userSchema.plugin(encrypt, { secret: process.env.SECRET_CODE, encryptedFields: ['password'] });
 
 const User = mongoose.model('User', userSchema);
 

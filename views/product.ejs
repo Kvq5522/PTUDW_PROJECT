@@ -2,138 +2,117 @@
 
 <body>
   <hr class="hr-to-paragraph" />
-  <!-- <div style="height: calc(100vh - 251px)">
-    <div
-      class="container fixed-content"
-      style="
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        align-items: center;
-        gap: 10px;
-      "
-    >
-      <button style="width: max-content">
-        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-      </button>
 
-      <button style="width: max-content">
-        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
-      </button>
+  <div style="display: flex">
+    <div style="flex-flow: column; width: calc(100vw * 0.3)">
+      <form
+        action="/product"
+        method="get"
+        class="container"
+        style="
+          justify-content: center;
+          width: calc((100vw * 0.3));
+          padding: 10px;
+          gap: 10px;
+        "
+      >
+        <div style="display: flex">
+          <input
+            type="text"
+            name="name"
+            style="width: calc((100vw * 0.3) * 0.8)"
+            placeholder="Product Name?"
+            style="border-radius: 5px"
+          />
+          <input
+            type="submit"
+            value="Submit"
+            style="width: calc((100vw * 0.3) * 0.2)"
+            style="border-radius: 5px"
+          />
+        </div>
 
-      <button id="sort-expensive" style="width: max-content">
-        Expensive <i class="fas fa-sort-amount-up"></i>
-      </button>
+        <br />
 
-      <button id="sort-cheap" style="width: max-content">
-        Cheap <i class="fas fa-sort-amount-down"></i>
-      </button>
-    </div>
-
-    <hr class="hr-between-paragraph" />
-
-    <form action="/" method="post" class="shop-form">
-      <% for (let i = 0; i < productList.length; i++) { %>
-        <div class="product-container">
-          <a href="/product/<%= productList[i].id %>" style="display: block; width: 100%"
-            ><img
-              src="<%= productList[i].image_url %>"
-              alt="flower"
-              style="width: 100%"
-          /></a>
-          <div style="display: flex; flex-flow: column">
-            <h3><%= productList[i].name %></h3>
-            <div style="display: flex; justify-content: space-between">
-              <h5><%= productList[i].price %>$</h5>
-              <button style="border: none">
-                <i class="fa-solid fa-cart-shopping"></i>
-              </button>
-            </div>
+        <div style="display: flex; gap: 10px">
+          <div>
+            <label for="sort">Sort by ↑:</label>
+            <select name="sort" style="border-radius: 5px">
+              <option value="name">Name</option>
+              <option value="price">Price</option>
+              <option value="date">Date</option>
+            </select>
+          </div>
+          <div>
+            <label for="sortValue">Value</label>
+            <select name="sortValue">
+              <option value="1">Ascending</option>
+              <option value="-1">Descending</option>
+            </select>
           </div>
         </div>
-      <% } %>
-    </form>
-  </div> -->
 
-  <div style="display: flex;">
-    <div style="flex-flow: column; width: calc(100vw * 0.3);">
-      <form action="/product" method="get" class="container" style="justify-content: center; width: calc((100vw * 0.3)); padding: 10px; gap: 10px;">
-          <div style="display: flex;">
-            <input type="text" name="name" style=" width: calc((100vw * 0.3) * 0.8)" placeholder="Product Name?">
-            <input type="submit" value="Submit" style=" width: calc((100vw * 0.3) * 0.2)">
-          </div>
+        <br />
 
-          <br />
+        <div>
+          <label for="color">Filter by Color:</label>
+          <select name="color">
+            <option value="">All</option>
+            <option value="Red">Red</option>
+            <option value="Pink">Pink</option>
+            <option value="Yellow">Yellow</option>
+            <option value="Orange">Orange</option>
+            <option value="White">White</option>
+            <option value="Blue">Blue</option>
+            <option value="Purple">Purple</option>
+          </select>
+        </div>
 
-          <div style="display: flex; gap: 10px;">
-            <div>
-              <label for="sort">Sort by ↑:</label>
-              <select name="sort">
-                <option value="name">Name</option>
-                <option value="price">Price</option>
-                <option value="date">Date</option>
-              </select>
-            </div>
-            <div>
-              <label for="sortValue">Value</label>
-              <select name="sortValue">
-                <option value="1">Ascending</option>
-                <option value="-1">Descending</option>
-              </select>
-            </div>
-          </div>
+        <br />
 
-          <br />
-
-          <div>
-            <label for="color">Filter by Color:</label>
-            <select name="color">
-              <option value="">All</option>
-              <option value="Red">Red</option>
-              <option value="Pink">Pink</option>
-              <option value="Yellow">Yellow</option>
-              <option value="Orange">Orange</option>
-              <option value="White">White</option>
-              <option value="Blue">Blue</option>
-              <option value="Purple">Purple</option>
-            </select>
-          </div>
-
-          <br />
-
-          <div>
-            <label for="priceRange">Filter by Price:</label>
-            <select name="priceRange">
-              <option value="0-1e9">All</option>
-              <option value="0-1000">0-1000</option>
-              <option value="1000-2500">1000-2500</option>
-              <option value="2500-5000">2500-5000</option>
-              <option value="5000-10000">5000-10000</option>
-            </select>
-          </div>
+        <div>
+          <label for="priceRange">Filter by Price:</label>
+          <select name="priceRange">
+            <option value="0-1e9">All</option>
+            <option value="0-1000">0-1000</option>
+            <option value="1000-2500">1000-2500</option>
+            <option value="2500-5000">2500-5000</option>
+            <option value="5000-10000">5000-10000</option>
+          </select>
+        </div>
       </form>
-
     </div>
 
-    <div style="flex-flow: column; width: calc(100vw * 0.7);">
-      <form class="container" style="width: calc(100vw * 0.7);">
+    <div style="flex-flow: column; width: calc(100vw * 0.7)">
+      <form class="container" style="width: calc(100vw * 0.7)">
         <div class="row">
           <% for (let i = 0; i < productList.length; i++) { %>
-          <div class="col-sm-4" style="padding: 10px;">
+          <div class="col-sm-4" style="padding: 10px">
             <div class="card">
               <a
-                href="/product/<%= productList[i].id %>"
+                href="/product/detail/<%= productList[i].id %>"
                 style="display: flex; width: 100%; justify-content: center"
                 ><img
                   src="<%= productList[i].image_url %>"
                   alt="flower"
-                  style="width: 192px; height: 192px; object-fit: cover; object-position: center center; border-radius: 50"
+                  style="
+                    width: 192px;
+                    height: 192px;
+                    object-fit: cover;
+                    object-position: center center;
+                    border-radius: 50;
+                  "
               /></a>
               <div class="card-body">
                 <h5 class="card-title"><%= productList[i].name %></h5>
                 <p class="card-text"><%= productList[i].price %>$</p>
-                <a href="/user/cart/add/<%= productList[i].id %>?price=<%= productList[i].price %>" role="button"
-                  ><i class="fa-solid fa-cart-shopping" style="color: #ff8f52"></i
+                <a
+                  href="/user/cart/add/<%= productList[i].id %>?price=<%= productList[i].price %>"
+                  role="button"
+                  ><i
+                    class="fa-solid fa-cart-shopping"
+                    style="color: #ff8f52"
+                  ></i
                 ></a>
               </div>
             </div>
@@ -141,11 +120,39 @@
           <% } %>
         </div>
       </form>
+
+      <div style="display: flex; gap: 10px; justify-content: center">
+        <a
+          href="/product?<%= pagination.curQuery %>page=<%= pagination.prevPage %>"
+          style="text-decoration: none; color: #ff8f52"
+          id="prev-<%= pagination.prevPage %>"
+          ><i class="fa fa-arrow-left" aria-hidden="true"></i>Prev</a
+        >
+        <% for (let i = 1; i <= pagination.maxPage ; i++) { %>
+        <a
+          href="/product?<%= pagination.curQuery %>page=<%= i %>"
+          style="text-decoration: none; color: #ff8f52"
+          id="page-<%= i %>"
+        >
+          <%= i %>
+        </a>
+        <% } %>
+        <a
+          href="/product?<%= pagination.curQuery %>page=<%= pagination.nextPage %>"
+          style="text-decoration: none; color: #ff8f52;"
+          id="next-<%= pagination.nextPage %>"
+          >Next<i class="fa fa-arrow-right" aria-hidden="true"></i></a
+        >
+      </div>
     </div>
   </div>
 
   <br />
   <br />
 </body>
+
+<script>
+  
+</script>
 
 <%- include('footer') %>

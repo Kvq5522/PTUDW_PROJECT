@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/User.controller');
+const controller = require('../controllers/user.controller');
 
 router.get('/', (req, res) => {
     if (!req.isAuthenticated()) {
@@ -15,7 +15,7 @@ router.get('/profile', (req, res) => {
     controller.getProfilePage(req, res);
 });
 
-router.post('/profile', (req, res) => {
+router.post('/update_profile', (req, res) => {
     controller.updateProfile(req, res);
 });
 

@@ -1,8 +1,9 @@
 const carts = require('../models/Cart.model');
 const products = require('../models/Product.model');
+const users = require('../models/User.model');
 const orders = require('../models/Order.model');
 
-const getProfilePage = (req, res) => {
+const getProfilePage = async (req, res) => {
     if (!req.isAuthenticated()) {
         res.redirect('/auth/signin');
         return;
@@ -12,7 +13,23 @@ const getProfilePage = (req, res) => {
 };
 
 const updateProfile = (req, res) => {
-    res.send('developing...');
+    const newPassword = req.body.password ? req.body.password : req.user.password;
+    const newAddress = req.body.address ? req.body.address : req.user.address;
+    const new_phone_number = req.body.phone_number ? req.body.phone_number : req.user.phone_number;
+    const newDataUrl = req.body.dataUrl ? req.body.dataUrl : req.user.image_url;
+
+    req.user.setPassword(newPassword, async (err, user) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        req.user.address = newAddress;
+        req.user.phone_number = new_phone_number;
+        req.user.image_url = newDataUrl;
+        await req.user.save();
+
+        res.redirect('/user/profile');
+    });
 };
 
 const getCartPage = async (req, res) => {
@@ -30,8 +47,8 @@ const getCartPage = async (req, res) => {
     res.render('cart', {cartDetail: fetchedProducts.length > 0 ? fetchedProducts : [], total: req.user.cart.total});
 }
 
-const addProductToCart = (req, res) => {
-    if (!req.isAuthenticated()) {
+const addProductToCart = async (req, res) => {
+    if (!req.isAuthenticated() || !req.user) {
         res.redirect('/auth/signin');
         return;
     }
@@ -49,11 +66,11 @@ const addProductToCart = (req, res) => {
         req.user.cart.total += productPrice;
     }
 
-    req.user.save();
-    res.end();
+    await req.user.save();
+    res.redirect('back')
 };
 
-const deleteProductFromCart = (req, res) => {
+const deleteProductFromCart = async (req, res) => {
     if (!req.isAuthenticated()) {
         res.redirect('/auth/signin');
         return;
@@ -70,7 +87,7 @@ const deleteProductFromCart = (req, res) => {
         req.user.cart.total -= Number(req.query.price);
     }
 
-    req.user.save();
+    await req.user.save();
     res.redirect('/user/cart');
 };
 
@@ -80,12 +97,17 @@ const getOrderInputPage = async (req, res) => {
         return;
     }
 
-    let fetchedProducts = await products.Product.find({'_id': {$in: req.user.cart.items}});
+    if (req.user.cart.items.length === 0) {
+        res.redirect('/user/cart');
+        return;
+    }
 
+    let fetchedProducts = await products.Product.find({'_id': {$in: req.user.cart.items}});
+    
     res.render('order', {cartDetail: fetchedProducts.length > 0 ? fetchedProducts : []});
 };
 
-const submitOrder = (req, res) => {
+const submitOrder = async (req, res) => {
     if (!req.isAuthenticated()) {
         res.redirect('/auth/signin');
         return;
@@ -95,7 +117,8 @@ const submitOrder = (req, res) => {
     const date = req.body.shippingDate;
 
     const newOrder = new orders.Order({
-        username: req.user._id,
+        username: req.user.username,
+        userID: req.user._id,
         phone_number: req.user.phone_number,
         address: address,
         items: req.user.cart.items,
@@ -105,7 +128,7 @@ const submitOrder = (req, res) => {
 
     newOrder.save();
     req.user.cart = new carts.Cart({});
-    req.user.save();
+    await req.user.save();
     res.redirect('/user/cart');
 };
 
