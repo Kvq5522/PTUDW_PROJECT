@@ -1,7 +1,4 @@
 
-require('dotenv').config({
-    path: './.env'
-});
 const users = require('../models/User.model');
 const passport = require('passport');
 const mailer = require('../config/mailer');
@@ -146,6 +143,8 @@ const resetPassword = (req, res) => {
         return;
     }
 
+    console.log(username, token, password)
+
     users.User.findOne({username: username}, (err, user) => {
         if (err) {
             res.send({message: 'Result: ' + err.message});
@@ -166,71 +165,10 @@ const resetPassword = (req, res) => {
                 return;
             }
 
-            user.recovery_string = '';
-            user.save();
-
             res.send({message: 'Result: Password has been changed, please log in again'});
             res.end();
         });
     }); 
-}
-
-const sendActivationEmail = (req, res) => {
-    if (!req.isAuthenticated()) {
-        res.redirect('/auth/signin');
-        return;
-    }
-
-    const id = req.user.id;
-    const username = req.user.username;
-    
-    bcrypt.hash(id, parseInt(process.env.SALT_ROUNDS), (err, hashed) => {
-        if (err) {
-            res.send({message: 'Result: ' + err.message});
-            res.end();
-            return;
-        }
-
-        while (hashed.includes('/')) {
-            hashed = hashed.replace('/', '*');
-        }
-
-        const htmlContent = `
-        <h2>Activate your account</h2>
-        <p>Url: ${req.protocol}://${req.hostname}:${process.env.PORT}/auth/activate/sent/${hashed}?id=${id}</p>
-        `;
-    
-        mailer.sendMail(username, 'Activate your account', htmlContent);
-        res.redirect('back');
-    })
-}
-
-const activateAccount = (req, res) => {
-    let token = req.params.token;
-    let id = req.query.id;
-
-    while (token.includes('*')) {
-        token = token.replace('*', '/');
-    }
-
-    if (!bcrypt.compare(id, token)) {
-        res.send({message: 'Result: Wrong token'});
-        res.end();
-        return;
-    }
-
-    users.User.findById(id, (err, user) => {
-        if (err) {
-            res.send({message: 'Result: ' + err.message});
-            res.end();
-            return;
-        }
-
-        user.verified = true;
-        user.save();
-
-        res.redirect('/user/profile');
-    });
 }
 
 module.exports = { 
@@ -241,7 +179,5 @@ module.exports = {
     signOut,
     getRecoveryPage,
     sendToken, 
-    resetPassword,
-    sendActivationEmail,
-    activateAccount
+    resetPassword
 };

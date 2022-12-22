@@ -28,7 +28,7 @@ const getProductPage = async (req, res) => {
         curQuery: queryString
     } 
 
-    products.Product.find({name: {'$regex': nameFilter, '$options': 'i'}, color: {'$regex': colorFilter, '$options': 'i'}, 
+    products.Product.find({name: {'$regex': nameFilter, '$options': 'i'}, color: {'$regex': colorFilter}, 
     price: {$gte: lowPivot, $lte: highPivot}}).limit(maxItem).skip((pagination.curPage - 1) * maxItem).sort([[`${sortFilter}`, sortValueFilter]])
     .exec((err, data) => {
         if (err) {

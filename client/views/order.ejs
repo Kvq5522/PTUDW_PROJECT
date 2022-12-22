@@ -1,0 +1,81 @@
+<%- include('header') %>
+
+<body>
+  <hr class="hr-to-paragraph" />
+
+  <div class="container" style="display: flex; width: calc(100vw - 50px)">
+    <div style="width: calc((100vw - 50px) * 0.7); flex-flow: column">
+      <div>
+        <% for (let i = 0; i < cartDetail.length; i++) { %>
+        <div style="display: flex; gap: 10px; padding: 20px">
+          <img
+            src="<%= cartDetail[i].image_url %>"
+            alt="flower"
+            style="object-fit: cover; width: 80px; height: 80px"
+          />
+          <div
+            style="
+              display: flex;
+              flex-flow: column;
+              flex: 1;
+              justify-content: space-between;
+            "
+          >
+            <div style="display: flex; justify-content: space-between">
+              <h6><%= cartDetail[i].name %></h6>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end">
+              <h6>Cost: <%= cartDetail[i].price %>$</h6>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+    <div style="width: calc((100vw - 50px) * 0.3); flex-flow: column">
+      <form
+        action="/user/cart/order/submit"
+        method="post"
+        style="display: flex; flex-flow: column; gap: 20px"
+      >
+        <input
+          type="text"
+          name="address"
+          placeholder="Enter shipping address"
+        />
+        <input type="date" name="shippingDate" required/>
+        <input
+          type="submit"
+          value="Submit"
+          style="
+            width: 100px;
+            justify-content: center;
+            background-color: #ff8f52;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 3px;
+          "
+        />
+      </form>
+    </div>
+  </div>
+
+  <br />
+</body>
+
+<script>
+    const dateCheck = document.getElementsByName('shippingDate')[0];
+    dateCheck.addEventListener('change', (e) => {
+        const date = new Date(dateCheck.value);
+        const today = new Date();
+        if (date < today) {
+            dateCheck.value = '';
+            alert('Please choose a valid date');
+        }
+    });
+</script>
+
+<%- include('footer') %>

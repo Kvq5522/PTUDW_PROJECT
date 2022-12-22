@@ -34,14 +34,5 @@ router.post('/recovery/reset', (req, res) => {
     controller.resetPassword(req, res);
 })
 
-router.get('/activate/:userID', (req, res) => {
-    controller.sendActivationEmail(req, res);
-})
-
-router.get('/activate/sent/:token', (req, res) => {
-    controller.activateAccount(req, res);
-});
-
-
 module.exports = router;
 

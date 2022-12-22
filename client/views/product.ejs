@@ -106,21 +106,14 @@
               <div class="card-body">
                 <h5 class="card-title"><%= productList[i].name %></h5>
                 <p class="card-text"><%= productList[i].price %>$</p>
-                <p class="card-text" style="border: none">
-                  <%= productList[i].available ? 'On stock' : 'Out of stock' %>
-                </p>
-
-                <button
-                  style="border: none;"
-                  type="submit"
-                  value="/user/cart/add/<%= productList[i].id %>?price=<%= productList[i].price %>&available=<%= productList[i].available %>"
-                  name="addCart"
-                >
-                  <i
+                <a
+                  href="/user/cart/add/<%= productList[i].id %>?price=<%= productList[i].price %>"
+                  role="button"
+                  ><i
                     class="fa-solid fa-cart-shopping"
                     style="color: #ff8f52"
-                  ></i>
-                </button>
+                  ></i
+                ></a>
               </div>
             </div>
           </div>
@@ -146,10 +139,10 @@
         <% } %>
         <a
           href="/product?<%= pagination.curQuery %>page=<%= pagination.nextPage %>"
-          style="text-decoration: none; color: #ff8f52"
+          style="text-decoration: none; color: #ff8f52;"
           id="next-<%= pagination.nextPage %>"
-          >Next<i class="fa fa-arrow-right" aria-hidden="true"></i
-        ></a>
+          >Next<i class="fa fa-arrow-right" aria-hidden="true"></i></a
+        >
       </div>
     </div>
   </div>
@@ -159,26 +152,7 @@
 </body>
 
 <script>
-  const arrayButton = document.querySelectorAll('button[name="addCart"]');
   
-  for (let i = 0; i < 9; i++) {
-    arrayButton[i].addEventListener('click', async () => {
-      const url = arrayButton[i].value;
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const data = await response.json();
-
-      console.log(data);  
-      
-      alert("Add to cart " + data.message);
-    });
-  }
 </script>
 
 <%- include('footer') %>
-

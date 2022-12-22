@@ -1,0 +1,97 @@
+<%- include('header') %>
+
+<body>
+  <hr class="hr-to-paragraph" />
+
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    "
+  >
+    <div
+      style="
+        background-color: white;
+        width: calc(100vw * 0.4);
+        padding: 20px;
+        display: flex;
+        gap: 10px;
+      "
+    >
+      <h4>Your cart</h4>
+
+      <div>
+        <br />
+
+        <form style="display: flex; flex-flow: column; gap: 20px">
+          <% for (let i = 0; i < cartDetail.length; i++) { %>
+          <div style="display: flex; gap: 10px; padding: 20px">
+            <img
+              src="<%= cartDetail[i].image_url %>"
+              alt="flower"
+              style="object-fit: cover; width: 80px; height: 80px"
+            />
+            <div
+              style="
+                display: flex;
+                flex-flow: column;
+                flex: 1;
+                justify-content: space-between;
+              "
+            >
+              <div style="display: flex; justify-content: space-between">
+                <h6><%= cartDetail[i].name %></h6>
+                <a
+                  href="/user/cart/delete/<%= cartDetail[i].id %>?price=<%= cartDetail[i].price %>"
+                >
+                  <i class="fa-solid fa-trash-can" style="color: #ff8f52"></i>
+                </a>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end">
+                <h6>Cost: <%= cartDetail[i].price %>$</h6>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </form>
+      </div>
+    </div>
+
+    <div
+      style="
+        background-color: white;
+        height: max-content;
+        width: calc(100vw * 0.2);
+        padding: 10px;
+      "
+    >
+      <form action="./checkout" method="post">
+        <h5>Total: <%= total %>$</h5>
+
+        <a
+          href="/user/cart/order/input"
+          role="button"
+          style="
+            width: 100px;
+            justify-content: center;
+            background-color: #ff8f52;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            padding: 3px;
+          "
+        >
+          Checkout
+        </a>
+      </form>
+    </div>
+  </div>
+
+  <br />
+</body>
+
+<%- include('footer') %>

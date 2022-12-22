@@ -34,7 +34,7 @@
         "
       >
         <div>
-          <h5><%= item.name %> - <%= item.available ? 'On stock' : 'Out of stock' %></h5>
+          <h5><%= item.name %></h5>
           <p><%= item.description %></p>
         </div>
         <div
@@ -46,7 +46,10 @@
           "
         >
           <h5>Price: <div name="price"><%= item.price %>$</div></h5>
-          <a href="/user/cart/add/<%= item.id %>?price=<%= item.price %>&available=<%= item.available %>">
+          <!-- <button class="cart-button">
+            <i class="fa-solid fa-cart-shopping"></i> Add to cart
+          </button> -->
+          <a href="/user/cart/add/<%= item.id %>?price=<%= item.price %>">
               <i class="fa-solid fa-cart-shopping" style="color: #FF8F52"></i>
           </a>
           
