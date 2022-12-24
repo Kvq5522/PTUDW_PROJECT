@@ -10,4 +10,8 @@ router.get('/api', async (req, res) => {
     await controller.getProductAPI(req, res);
 });
 
+router.get('/detail/:productID', async (req, res) => {
+    await controller.getProductDetailPage(req, res);
+});
+
 module.exports = router;
