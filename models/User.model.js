@@ -26,12 +26,16 @@ const userSchema = new mongoose.Schema({
     },
     recovery_string: {
         type: String,
-        default: "recovery_string"
+        default: ""
     },
     cart: carts.cartSchema,
     registration: {
         type: Date,
         default: Date.now()
+    },
+    verified: {
+        type: Boolean,
+        default: false
     },
     ban: {
         type: Boolean,

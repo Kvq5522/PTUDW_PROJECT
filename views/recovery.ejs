@@ -1,0 +1,124 @@
+<%- include('header') %>
+
+<link href="/css/authenticate.css" rel="stylesheet" type="text/css" />
+
+<body>
+  <hr class="hr-to-paragraph" />
+
+  <div
+    style="
+      background-color: #ff8f52;
+      width: calc(100vw * 0.6);
+      margin: auto;
+      text-align: center;
+      border-radius: 10px;
+    "
+  >
+    <h1 style="color: black; font-size: 28px">Recovery</h1>
+
+    <br />
+
+    <form id="form">
+      <div style="padding: 10px">
+        Enter your email:
+        <input
+          type="email"
+          name="username"
+          placeholder="Email here"
+          id="email"
+          required
+        />
+      </div>
+
+      <div style="padding: 10px">
+        Enter your token:
+        <input
+          type="text"
+          name="token"
+          placeholder="Token here"
+          id="token"
+          required
+        />
+      </div>
+
+      <div style="padding: 10px">
+        Enter new passwd:
+        <input
+          type="text"
+          name="password"
+          placeholder="Password here"
+          id="password"
+          required
+        />
+      </div>
+    </form>
+
+    <h5 id="message" style="color: black"></h3>
+
+    <div style="display: flex; justify-content: center; align-items: center">
+      <div style="padding: 10px">
+        <button
+          class="btn mt-3 mb-5"
+          style="background-color: white; color: #ff8f52"
+          id="getToken"
+          type="button"
+        >
+          Get your token
+        </button>
+      </div>
+
+      <div style="padding: 10px">
+        <button
+          class="btn mt-3 mb-5"
+          style="background-color: white; color: #ff8f52"
+          id="submit"
+          type="button"
+        >
+          Recovery
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  const message = document.getElementById('message');
+  const button = document.getElementById('getToken');
+  const submit = document.getElementById('submit');
+
+  button.addEventListener('click', async () => {
+    const input = document.getElementById('email');
+
+    const response = await fetch('/auth/recovery/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: input.value,  
+      }),
+    });
+
+    const data = await response.json();
+    message.innerHTML = data.message;
+  });
+
+  submit.addEventListener('click', async () => {
+    const response = await fetch('/auth/recovery/reset', {
+        method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: document.getElementById('email').value,
+        token: document.getElementById('token').value,
+        password: document.getElementById('password').value
+      }),
+    })
+
+    const data = await response.json();
+    message.innerHTML = data.message
+  });
+</script>
+
+<%- include('footer') %>

@@ -9,11 +9,11 @@ const getProfilePage = async (req, res) => {
         return;
     }
 
-    res.render('profile', {profile: req.user});
+    res.render('profile', {profile: req.user, message: req.user.verified ? 'Status: Verified!' : 'Status: Not verified!'});
 };
 
 const updateProfile = (req, res) => {
-    const newPassword = req.body.password ? req.body.password : req.user.password;
+    const newPassword = req.body.newPassword ? req.body.newPassword : req.user.password;
     const newAddress = req.body.address ? req.body.address : req.user.address;
     const new_phone_number = req.body.phone_number ? req.body.phone_number : req.user.phone_number;
     const newDataUrl = req.body.dataUrl ? req.body.dataUrl : req.user.image_url;
@@ -21,13 +21,15 @@ const updateProfile = (req, res) => {
     req.user.setPassword(newPassword, async (err, user) => {
         if (err) {
             console.log(err);
+            res.render('profile', {profile: req.user, message: 'Result: Update failed!'});
             return;
         }
+        
         req.user.address = newAddress;
         req.user.phone_number = new_phone_number;
         req.user.image_url = newDataUrl;
         await req.user.save();
-
+        
         res.redirect('/user/profile');
     });
 };
@@ -55,10 +57,17 @@ const addProductToCart = async (req, res) => {
 
     const productID = req.params.productID;
     const productPrice = Number(req.query.price);
+    const productAvailable = req.query.available;
+
+    console.log(productAvailable)
+
+    if (!productAvailable) {
+        res.send({message: 'Failed'})
+        return;
+    }
 
     if (!req.user.cart) {
         req.user.cart = new carts.Cart({});
-
     }
 
     if (!req.user.cart.items.includes(productID)) {
@@ -67,7 +76,7 @@ const addProductToCart = async (req, res) => {
     }
 
     await req.user.save();
-    res.redirect('back')
+    res.send({message: 'Success'})
 };
 
 const deleteProductFromCart = async (req, res) => {

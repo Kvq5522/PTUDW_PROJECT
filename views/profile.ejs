@@ -4,8 +4,16 @@
   <hr class="hr-to-paragraph" />
 
   <div class="container_profile">
-    <div class="leftbox" style="display: flex; flex-flow: column; justify-content: center; align-items: center;">
-      <a onclick="tabs(0)" class="tab active" style="color: white;">
+    <div
+      class="leftbox"
+      style="
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <a onclick="tabs(0)" class="tab active" style="color: white">
         <i class="fa fa-user"></i>
       </a>
 
@@ -35,13 +43,27 @@
 
         <h2 style="visibility: hidden"></h2>
 
-        <a
-          href="/auth/signout"
-          class="btn_profile"
-          role="button"
-          style="text-decoration: none"
-          >Good bye!</a
-        >
+        <h6 id="message"><%= message %></h6>
+
+        <div style="display: flex; padding: 10px; gap: 10px">
+          <a
+            href="/auth/activate/<%= profile.id %>"
+            class="btn_profile"
+            role="button"
+            style="text-decoration: none"
+            id="activate"
+          >
+            Activate your account
+          </a>
+
+          <a
+            href="/auth/signout"
+            class="btn_profile"
+            role="button"
+            style="text-decoration: none"
+            >Good bye!
+          </a>
+        </div>
       </div>
 
       <div class="Profile tabShow">
@@ -52,15 +74,16 @@
             type="text"
             class="input"
             value="<%= profile.username %>"
+            id="username"
             readonly
           />
-          <h2>Password</h2>
+          <h2>New password</h2>
           <input
             type="password"
             class="input"
             placeholder="*****"
-            name="password"
-            id="password"
+            name="newPassword"
+            id="newPassword"
           />
           <h2>Phone number</h2>
           <input
@@ -89,8 +112,12 @@
           <input type="hidden" name="dataUrl" id="dataUrl" />
           <h2 style="visibility: hidden"></h2>
 
-          <input type="submit" value="Update" class="btn_profile" />
+          <button class="btn_profile" id="update">Update</button>
         </form>
+
+        <div>
+          <h5 id="message"></h5>
+        </div>
       </div>
     </div>
   </div>
@@ -103,6 +130,13 @@
   const inputFile = document.getElementById("dataUrl");
   const tabBtn = document.querySelectorAll(".tab");
   const tab = document.querySelectorAll(".tabShow");
+  const message = document.getElementById("message");
+
+  const hideActivate = () => {
+    if (message.innerText === "Status: Verified!") {
+      document.getElementById("activate").style.display = "none";
+    }
+  };
 
   file.addEventListener("change", (e) => {
     const file = e.target.files[0];
@@ -122,4 +156,5 @@
   }
 
   tabs(0);
+  hideActivate();
 </script>

@@ -8,7 +8,6 @@ const router = require('./routes/index');
 const dbConnection = require('./config/db/index');
 let passport = require('passport');
 const users = require('./models/User.model');
-const passportInit = require('./config/passport/index');
 const app = express();
 
 app.use(bodyParser.json({ limit: '10mb' }));

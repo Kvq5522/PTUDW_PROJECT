@@ -4,6 +4,25 @@
   <hr class="hr-to-paragraph" />
 
   <div style="display: flex">
+    <div
+      id="loading"
+      style="
+        visibility: hidden;
+        position: absolute;
+        left: 65%;
+        transform: translate(-50%, -50%);
+        width: max-content;
+        height: max-content;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      "
+    >
+      <h1 style="padding: 0; margin: 0">Loading ...</h1>
+    </div>
+
     <div style="flex-flow: column; width: calc(100vw * 0.3)">
       <form
         action="/product"
@@ -88,7 +107,7 @@
         <div class="row">
           <% for (let i = 0; i < productList.length; i++) { %>
           <div class="col-sm-4" style="padding: 10px">
-            <div class="card">
+            <div class="card" id="card-<%= i %>">
               <a
                 href="/product/detail/<%= productList[i].id %>"
                 style="display: flex; width: 100%; justify-content: center"
@@ -102,18 +121,35 @@
                     object-position: center center;
                     border-radius: 50;
                   "
+                  id="image-<%= i %>"
               /></a>
               <div class="card-body">
-                <h5 class="card-title"><%= productList[i].name %></h5>
-                <p class="card-text"><%= productList[i].price %>$</p>
-                <a
-                  href="/user/cart/add/<%= productList[i].id %>?price=<%= productList[i].price %>"
-                  role="button"
-                  ><i
+                <h5 class="card-title" id="name-<%= i %>">
+                  <%= productList[i].name %>
+                </h5>
+                <p class="card-text" id="price-<%= i %>">
+                  <%= productList[i].price %>$
+                </p>
+                <p
+                  class="card-text"
+                  style="border: none"
+                  id="available-<%= i %>"
+                >
+                  <%= productList[i].available ? 'On stock' : 'Out of stock' %>
+                </p>
+
+                <button
+                  style="border: none"
+                  type="submit"
+                  value="/user/cart/add/<%= productList[i].id %>?price=<%= productList[i].price %>&available=<%= productList[i].available %>"
+                  id="button-<%= i %>"
+                  name="addCart"
+                >
+                  <i
                     class="fa-solid fa-cart-shopping"
                     style="color: #ff8f52"
-                  ></i
-                ></a>
+                  ></i>
+                </button>
               </div>
             </div>
           </div>
@@ -122,27 +158,30 @@
       </form>
 
       <div style="display: flex; gap: 10px; justify-content: center">
-        <a
-          href="/product?<%= pagination.curQuery %>page=<%= pagination.prevPage %>"
-          style="text-decoration: none; color: #ff8f52"
-          id="prev-<%= pagination.prevPage %>"
-          ><i class="fa fa-arrow-left" aria-hidden="true"></i>Prev</a
+        <button
+          value="/product/api?<%= pagination.curQuery %>page=<%= pagination.prevPage %>"
+          style="text-decoration: none; color: #ff8f52; border: none; border-radius: 5px;"
+          id="prev"
         >
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>Prev
+        </button>
         <% for (let i = 1; i <= pagination.maxPage ; i++) { %>
-        <a
-          href="/product?<%= pagination.curQuery %>page=<%= i %>"
-          style="text-decoration: none; color: #ff8f52"
+        <button
+          value="/product/api?<%= pagination.curQuery %>page=<%= i %>"
+          style="text-decoration: none; color: #ff8f52; border: none; border-radius: 5px;"
           id="page-<%= i %>"
+          name="page"
         >
           <%= i %>
-        </a>
+        </button>
         <% } %>
-        <a
-          href="/product?<%= pagination.curQuery %>page=<%= pagination.nextPage %>"
-          style="text-decoration: none; color: #ff8f52;"
-          id="next-<%= pagination.nextPage %>"
-          >Next<i class="fa fa-arrow-right" aria-hidden="true"></i></a
+        <button
+          value="/product/api?<%= pagination.curQuery %>page=<%= pagination.nextPage %>"
+          style="text-decoration: none; color: #ff8f52;  border: none; border-radius: 5px;"
+          id="next"
         >
+          Next<i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -152,7 +191,139 @@
 </body>
 
 <script>
-  
+  const arrayButton = document.querySelectorAll('button[name="addCart"]');
+  const arrayPaging = document.querySelectorAll('button[name="page"]');
+  const prevButton = document.getElementById("prev");
+  const nextButton = document.getElementById("next");
+
+  for (let i = 0; i < 9; i++) {
+    arrayButton[i].addEventListener("click", async () => {
+      const url = arrayButton[i].value;
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      alert("Add to cart " + data.message);
+    });
+  }
+
+  for (let i = 0; i < arrayPaging.length; i++) {
+    arrayPaging[i].addEventListener("click", async () => {
+      document.getElementById("loading").style.visibility = "visible";
+      window.scrollTo(0, 0);
+
+      const url = arrayPaging[i].value;
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      document.getElementById("prev").value =
+        "/product/api?<%= pagination.curQuery %>page=" + data.pagination.prevPage;
+      document.getElementById("next").value =
+        "/product/api?<%= pagination.curQuery %>page=" + data.pagination.nextPage;
+
+      for (let j = 0; j < data.productList.length; j++) {
+        document.getElementById("image-" + j).src = data.productList[j].image_url;
+        document.getElementById("name-" + j).innerHTML = data.productList[j].name;
+        document.getElementById("price-" + j).innerHTML = data.productList[j].price + "$";
+        document.getElementById("available-" + j).innerHTML = data.productList[j].available? "On stock": "Out of stock";
+        document.getElementById("button-" + j).value ="/user/cart/add/" + data.productList[j].id 
+        +"?price=" +data.productList[j].price +"&available=" +data.productList[j].available;
+        document.getElementById("card-" + j).style.visibility = "visible";
+      }
+
+      for (let j = data.productList.length; j < 9; j++) {
+        document.getElementById("card-" + j).style.visibility = "hidden";
+      }
+
+      document.getElementById("loading").style.visibility = "hidden";
+    });
+  }
+
+  prevButton.addEventListener('click', async () => {
+    document.getElementById("loading").style.visibility = "visible";
+    window.scrollTo(0, 0);
+
+    const url = prevButton.value;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    document.getElementById("prev").value =
+      "/product/api?<%= pagination.curQuery %>page=" + data.pagination.prevPage;
+    document.getElementById("next").value =
+      "/product/api?<%= pagination.curQuery %>page=" + data.pagination.nextPage;
+
+    for (let j = 0; j < data.productList.length; j++) {
+      document.getElementById("image-" + j).src = data.productList[j].image_url;
+      document.getElementById("name-" + j).innerHTML = data.productList[j].name;
+      document.getElementById("price-" + j).innerHTML = data.productList[j].price + "$";
+      document.getElementById("available-" + j).innerHTML = data.productList[j].available? "On stock": "Out of stock";
+      document.getElementById("button-" + j).value ="/user/cart/add/" + data.productList[j].id 
+      +"?price=" +data.productList[j].price +"&available=" +data.productList[j].available;
+      document.getElementById("card-" + j).style.visibility = "visible";
+    }
+
+    for (let j = data.productList.length; j < 9; j++) {
+      document.getElementById("card-" + j).style.visibility = "hidden";
+    }
+
+    document.getElementById("loading").style.visibility = "hidden";
+  });
+
+  nextButton.addEventListener('click', async () => {
+    document.getElementById("loading").style.visibility = "visible";
+    window.scrollTo(0, 0);
+
+    const url = nextButton.value;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    document.getElementById("prev").value =
+      "/product/api?<%= pagination.curQuery %>page=" + data.pagination.prevPage;
+    document.getElementById("next").value =
+      "/product/api?<%= pagination.curQuery %>page=" + data.pagination.nextPage;
+
+    for (let j = 0; j < data.productList.length; j++) {
+      document.getElementById("image-" + j).src = data.productList[j].image_url;
+      document.getElementById("name-" + j).innerHTML = data.productList[j].name;
+      document.getElementById("price-" + j).innerHTML = data.productList[j].price + "$";
+      document.getElementById("available-" + j).innerHTML = data.productList[j].available? "On stock": "Out of stock";
+      document.getElementById("button-" + j).value ="/user/cart/add/" + data.productList[j].id 
+      +"?price=" +data.productList[j].price +"&available=" +data.productList[j].available;
+      document.getElementById("card-" + j).style.visibility = "visible";
+    }
+
+    for (let j = data.productList.length; j < 9; j++) {
+      document.getElementById("card-" + j).style.visibility = "hidden";
+    }
+
+    document.getElementById("loading").style.visibility = "hidden";
+  })
 </script>
 
 <%- include('footer') %>

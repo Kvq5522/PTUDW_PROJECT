@@ -22,5 +22,26 @@ router.get('/signout', (req, res) => {
     controller.signOut(req, res);
 });
 
+router.get('/recovery', (req, res) => {
+    controller.getRecoveryPage(req, res);
+});
+
+router.post('/recovery/token', (req, res) => {
+    controller.sendToken(req, res);
+});
+
+router.post('/recovery/reset', (req, res) => {
+    controller.resetPassword(req, res);
+})
+
+router.get('/activate/:userID', (req, res) => {
+    controller.sendActivationEmail(req, res);
+})
+
+router.get('/activate/sent/:token', (req, res) => {
+    controller.activateAccount(req, res);
+});
+
+
 module.exports = router;
 
