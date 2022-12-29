@@ -122,6 +122,11 @@ const submitOrder = async (req, res) => {
         return;
     }
 
+    if (!req.user.verified) {
+        res.redirect('/user/profile');
+        return;
+    }
+
     const address = req.body.address ? req.body.address : req.user.address;
     const date = req.body.shippingDate;
 

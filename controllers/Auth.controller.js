@@ -67,12 +67,12 @@ const validSignUp = (req, res) => {
     users.User.register({username: email, phone_number: phone, address: address}, password, (err, user) => {
         if (err) {
             console.log(err);   
-            res.render('signup', {message: 'Result: ' + err.message});
+            res.send({message: 'Result: ' + err.message});
             return;
         }
 
-        res.render('signup', {message: 'Result: Sign up successfully!'});
-    })
+        res.send({message: 'Result: Account has been created, please check your email to activate your account!'});
+    });
 };
 
 const signOut = (req, res) => {

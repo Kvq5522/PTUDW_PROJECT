@@ -1,5 +1,6 @@
 const products = require('../models/Product.model');
 const qs = require('qs');
+const { query } = require('express');
 
 const getProductPage = async (req, res) => {
     const {sort, color, priceRange, sortValue, ...withoutFilter} = req.query;
@@ -54,18 +55,16 @@ const getProductAPI = async (req, res) => {
     const maxPage = Math.ceil(await products.Product.countDocuments({name: {'$regex': nameFilter, '$options': 'i'}, 
     color: {'$regex': colorFilter}, price: {$gte: lowPivot, $lte: highPivot}}) / maxItem);
     const curPage = req.query.page ? Number(req.query.page) : 1; 
-    let queryString = ""; 
-    for (i in req.query) {
-        if (i != "page") {
-            queryString += `${i}=${req.query[i]}&`;
-        }
-    }
+
+    let query = qs.stringify(req.query, { encode: false });
+    query = query.substring(0, query.indexOf('page') - 1);
+
     const pagination = {
         curPage: curPage,
         maxPage: maxPage,
         nextPage: curPage < maxPage ? curPage + 1 : maxPage,
         prevPage: curPage > 1 ? curPage - 1 : 1,
-        curQuery: queryString
+        curQuery: query
     } 
 
     products.Product.find({name: {'$regex': nameFilter, '$options': 'i'}, color: {'$regex': colorFilter, '$options': 'i'}, 

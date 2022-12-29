@@ -226,12 +226,11 @@
       });
 
       const data = await response.json();
-      console.log(data);
 
       document.getElementById("prev").value =
-        "/product/api?<%= pagination.curQuery %>page=" + data.pagination.prevPage;
+        "/product/api?<%= pagination.curQuery %>&page=" + data.pagination.prevPage;
       document.getElementById("next").value =
-        "/product/api?<%= pagination.curQuery %>page=" + data.pagination.nextPage;
+        "/product/api?<%= pagination.curQuery %>&page=" + data.pagination.nextPage;
 
       for (let j = 0; j < data.productList.length; j++) {
         document.getElementById("image-" + j).src = data.productList[j].image_url;
@@ -264,12 +263,11 @@
     });
 
     const data = await response.json();
-    console.log(data);
 
     document.getElementById("prev").value =
-      "/product/api?<%= pagination.curQuery %>page=" + data.pagination.prevPage;
+      "/product/api?" + data.pagination.curQuery + "&page=" +data.pagination.prevPage;
     document.getElementById("next").value =
-      "/product/api?<%= pagination.curQuery %>page=" + data.pagination.nextPage;
+      "/product/api?" + data.pagination.curQuery + "&page=" +data.pagination.nextPage;
 
     for (let j = 0; j < data.productList.length; j++) {
       document.getElementById("image-" + j).src = data.productList[j].image_url;
@@ -301,12 +299,11 @@
     });
 
     const data = await response.json();
-    console.log(data);
 
     document.getElementById("prev").value =
-      "/product/api?<%= pagination.curQuery %>page=" + data.pagination.prevPage;
+      "/product/api?" + data.pagination.curQuery + "&page=" + data.pagination.prevPage;
     document.getElementById("next").value =
-      "/product/api?<%= pagination.curQuery %>page=" + data.pagination.nextPage;
+      "/product/api?" + data.pagination.curQuery + "&page=" +data.pagination.nextPage;
 
     for (let j = 0; j < data.productList.length; j++) {
       document.getElementById("image-" + j).src = data.productList[j].image_url;
