@@ -111,6 +111,7 @@
               <a
                 href="/product/detail/<%= productList[i].id %>"
                 style="display: flex; width: 100%; justify-content: center"
+                id = "link-<%= i %>"
                 ><img
                   src="<%= productList[i].image_url %>"
                   alt="flower"
@@ -234,10 +235,11 @@
 
       for (let j = 0; j < data.productList.length; j++) {
         document.getElementById("image-" + j).src = data.productList[j].image_url;
+        document.getElementById("link-" + j).href = "/product/detail/" + data.productList[j]._id;
         document.getElementById("name-" + j).innerHTML = data.productList[j].name;
         document.getElementById("price-" + j).innerHTML = data.productList[j].price + "$";
         document.getElementById("available-" + j).innerHTML = data.productList[j].available? "On stock": "Out of stock";
-        document.getElementById("button-" + j).value ="/user/cart/add/" + data.productList[j].id 
+        document.getElementById("button-" + j).value ="/user/cart/add/" + data.productList[j]._id 
         +"?price=" +data.productList[j].price +"&available=" +data.productList[j].available;
         document.getElementById("card-" + j).style.visibility = "visible";
       }
@@ -271,10 +273,11 @@
 
     for (let j = 0; j < data.productList.length; j++) {
       document.getElementById("image-" + j).src = data.productList[j].image_url;
+      document.getElementById("link-" + j).href = "/product/detail/" + data.productList[j]._id;
       document.getElementById("name-" + j).innerHTML = data.productList[j].name;
       document.getElementById("price-" + j).innerHTML = data.productList[j].price + "$";
       document.getElementById("available-" + j).innerHTML = data.productList[j].available? "On stock": "Out of stock";
-      document.getElementById("button-" + j).value ="/user/cart/add/" + data.productList[j].id 
+      document.getElementById("button-" + j).value ="/user/cart/add/" + data.productList[j]._id 
       +"?price=" +data.productList[j].price +"&available=" +data.productList[j].available;
       document.getElementById("card-" + j).style.visibility = "visible";
     }
@@ -307,10 +310,11 @@
 
     for (let j = 0; j < data.productList.length; j++) {
       document.getElementById("image-" + j).src = data.productList[j].image_url;
+      document.getElementById("link-" + j).href = "/product/detail/" + data.productList[j]._id;
       document.getElementById("name-" + j).innerHTML = data.productList[j].name;
       document.getElementById("price-" + j).innerHTML = data.productList[j].price + "$";
       document.getElementById("available-" + j).innerHTML = data.productList[j].available? "On stock": "Out of stock";
-      document.getElementById("button-" + j).value ="/user/cart/add/" + data.productList[j].id 
+      document.getElementById("button-" + j).value ="/user/cart/add/" + data.productList[j]._id;
       +"?price=" +data.productList[j].price +"&available=" +data.productList[j].available;
       document.getElementById("card-" + j).style.visibility = "visible";
     }
